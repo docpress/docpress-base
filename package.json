@@ -1,0 +1,17 @@
+{
+  "name": "bookdown-base",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "github-markdown-css": "2.0.10",
+    "metalsmith-sass": "1.3.0",
+    "normalize.css": "3.0.3",
+    "ware": "1.3.0"
+  }
+}
