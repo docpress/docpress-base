@@ -1,7 +1,7 @@
 var bookdown = require('bookdown')
 
 var app = bookdown(__dirname)
-  .use(require('../../'))
+  .use(require('../../')())
 
 if (module.parent) {
   module.exports = app

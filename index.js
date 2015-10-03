@@ -5,10 +5,22 @@ const jade = require('jade')
 const assign = Object.assign
 const sass = require('node-sass')
 
-var app = ware()
-  .use(addAssets)
-  .use(relayout)
-  .use(require('metalsmith-sass'))
+/**
+ * Metalsmith middleware
+ */
+
+module.exports = function base (options) {
+  var app = ware()
+    .use(addAssets)
+    .use(relayout)
+    .use(require('metalsmith-sass'))
+
+  return app.run.bind(app)
+}
+
+/**
+ * Assets
+ */
 
 function addAssets (files, ms, done) {
   const result = sass.renderSync({
@@ -16,14 +28,18 @@ function addAssets (files, ms, done) {
     file: join(__dirname, 'data/style.sass'),
     outputStyle: 'compact'
   })
-  files['assets/style.css'] = {
-    contents: result.css
-  }
+
+  files['assets/style.css'] = { contents: result.css }
   done()
 }
 
+/**
+ * Layout jade
+ */
+
 function relayout (files, ms, done) {
-  const layout = jade.compile(fs.readFileSync(join(__dirname, 'data/layout.jade'), 'utf-8'))
+  const path = fs.readFileSync(join(__dirname, 'data/layout.jade'), 'utf-8')
+  const layout = jade.compile(path)
 
   Object.keys(files).forEach((fname) => {
     if (!fname.match(/\.html$/)) return
@@ -31,7 +47,6 @@ function relayout (files, ms, done) {
     const base = Array(fname.split('/').length).join('../')
     file.contents = layout(assign({}, file, { base }))
   })
+
   done()
 }
-
-module.exports = app.run.bind(app)
