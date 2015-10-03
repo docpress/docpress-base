@@ -1,6 +1,9 @@
 const ware = require('ware')
 const fs = require('fs')
 const join = require('path').join
+const jade = require('jade')
+const assign = Object.assign
+const sass = require('node-sass')
 
 var app = ware()
   .use(addAssets)
@@ -8,31 +11,25 @@ var app = ware()
   .use(require('metalsmith-sass'))
 
 function addAssets (files, ms, done) {
-  files['assets/normalize.css'] = {
-    contents: fs.readFileSync(require.resolve('normalize.css'), 'utf-8')
-  }
-  files['assets/markdown.css'] = {
-    contents: fs.readFileSync(join(__dirname, 'node_modules/github-markdown-css/github-markdown.css'), 'utf-8')
+  const result = sass.renderSync({
+    includePaths: [ join(__dirname, 'node_modules') ],
+    file: join(__dirname, 'data/style.sass'),
+    outputStyle: 'compact'
+  })
+  files['assets/style.css'] = {
+    contents: result.css
   }
   done()
 }
 
 function relayout (files, ms, done) {
+  const layout = jade.compile(fs.readFileSync(join(__dirname, 'data/layout.jade'), 'utf-8'))
+
   Object.keys(files).forEach((fname) => {
     if (!fname.match(/\.html$/)) return
-
     const file = files[fname]
-
     const base = Array(fname.split('/').length).join('../')
-
-    file.contents =
-      `<!doctype html>\n` +
-      `<html>\n` +
-      `<meta charset='utf-8'>\n` +
-      `<link rel="stylesheet" href='${base}assets/normalize.css'>\n` +
-      `<link rel="stylesheet" href='${base}assets/markdown.css'>\n` +
-      `<div class='markdown-body'>\n` +
-      file.contents.toString()
+    file.contents = layout(assign({}, file, { base }))
   })
   done()
 }
