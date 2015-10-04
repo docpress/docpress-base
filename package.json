@@ -24,6 +24,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "test:build": "cd fixture/onmount && node metalsmith.js"
   }
 }
