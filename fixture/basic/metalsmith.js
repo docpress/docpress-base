@@ -1,11 +1,4 @@
-var bookdown = require('bookdown-core')
-var Metalsmith = require('metalsmith')
-
-var app = Metalsmith(__dirname)
-  .source('.')
-  .destination('_bookdown')
-  .ignore('!{*.md,docs}')
-  .ignore('_bookdown')
+var app = require('bookdown-core/ms')(__dirname)
   .use(require('bookdown-core')())
   .use(require('../../')())
 
