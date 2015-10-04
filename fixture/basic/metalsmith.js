@@ -1,6 +1,12 @@
 var bookdown = require('bookdown-core')
+var Metalsmith = require('metalsmith')
 
-var app = bookdown(__dirname)
+var app = Metalsmith(__dirname)
+  .source('.')
+  .destination('_bookdown')
+  .ignore('!{*.md,docs}')
+  .ignore('_bookdown')
+  .use(require('bookdown-core')())
   .use(require('../../')())
 
 if (module.parent) {
