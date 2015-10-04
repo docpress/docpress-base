@@ -19,12 +19,14 @@
     "metalsmith": "2.1.0",
     "mocha": "2.3.3",
     "mocha-standard": "1.0.0",
-    "standard": "5.3.1"
+    "standard": "5.3.1",
+    "superstatic": "2.2.1"
   },
   "license": "MIT",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "test:build": "cd fixture/onmount && node metalsmith.js"
+    "test:build": "cd fixture/onmount && node metalsmith.js",
+    "test:serve": "ss fixture/onmount/_bookdown"
   }
 }

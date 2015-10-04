@@ -1,8 +1,10 @@
 describe('to do', function () {
   it('initial implementation', done)
-  it('tests')
+  it('tests', done)
   it('JS behavior', done)
-  it('custom CSS/JS')
+  it('account for single level')
+  it('active highlight')
+  it('sidebar toggle')
 })
 
 function done () {}
