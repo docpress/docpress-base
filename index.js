@@ -13,7 +13,7 @@ const sass = require('node-sass')
 
 module.exports = function base (options) {
   var app = ware()
-    .use(addAssets)
+    .use(addCss)
     .use(relayout)
 
   return app.run.bind(app)
@@ -23,7 +23,7 @@ module.exports = function base (options) {
  * Assets
  */
 
-function addAssets (files, ms, done) {
+function addCss (files, ms, done) {
   const result = sass.renderSync({
     includePaths: [ join(__dirname, 'node_modules') ],
     file: join(__dirname, 'data/style.sass'),
