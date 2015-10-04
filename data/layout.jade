@@ -16,8 +16,8 @@ html
     link(rel='stylesheet' href=(base + 'assets/style.css'))
   body
     .doc-layout
-      .menu.toc-menu
-        +menu(toc, 0)
       .body
         .markdown-body
           != contents
+      .menu.toc-menu
+        +menu(toc, 0)
