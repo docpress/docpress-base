@@ -1,7 +1,7 @@
 describe('to do', function () {
   it('initial implementation', done)
   it('tests')
-  it('JS behavior')
+  it('JS behavior', done)
   it('custom CSS/JS')
 })
 
