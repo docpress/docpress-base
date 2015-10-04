@@ -37,7 +37,7 @@ html, body
   &
     padding: 32px 0
     background: #fdfdfd
-    border-right: solid 1px #f3f3f3
+    box-shadow: inset -1px 0 #f3f3f3
     font-size: 0.9em
 
   ul, li
@@ -48,6 +48,10 @@ html, body
   .title
     display: block
     padding: 8px $pad
+    height: 1em
+    text-overflow: ellipsis
+    overflow: hidden
+    white-space: nowrap
 
   .-level-1.-parent > .title
     margin-top: 16px
@@ -58,6 +62,20 @@ html, body
     &, &:visited
       color: #555
       text-decoration: none
+      position: relative
+      transition: background-color 200ms linear, color 500ms linear
+
+    &:hover
+      background-color: rgba(dodgerblue, 0.02)
+      transition: none
+
+    &:active
+      background-color: rgba(dodgerblue, 0.04)
+      color: #111
+      transition: none
+
+    &.-active
+      border-right: solid 2px dodgerblue
 
   // First thing
   .-level-1:first-child > .title

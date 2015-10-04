@@ -3,7 +3,7 @@ describe('to do', function () {
   it('tests', done)
   it('JS behavior', done)
   it('account for single level', done)
-  it('custom CSS/JS')
+  it('custom CSS/JS', done)
   it('active highlight')
   it('sidebar toggle')
 })

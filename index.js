@@ -69,7 +69,7 @@ function relayout (files, ms, done) {
     const file = files[fname]
     const base = Array(fname.split('/').length).join('../')
     file.contents = layout(assign({}, file, {
-      base, toc, index
+      base, toc, index, active: fname
     }))
   })
 

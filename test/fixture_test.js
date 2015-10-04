@@ -16,13 +16,17 @@ describe('fixture', function () {
 
   describe('index.html', function () {
     before(function () {
-      data = fx.read('_bookdown/index.html')
+      data = fx.read('_bookdown/index.html').toLowerCase()
     })
 
     it('renders as html', function () {
-      expect(data.toLowerCase()).toInclude('<!doctype html>')
-      expect(data.toLowerCase()).toInclude('markdown-body')
-      expect(data.toLowerCase()).toInclude('toc-menu')
+      expect(data).toInclude('<!doctype html>')
+      expect(data).toInclude('markdown-body')
+      expect(data).toInclude('toc-menu')
+    })
+
+    it('highlights current menu item', function () {
+      expect(data).toMatch(/-active['"]>onmount/)
     })
   })
 

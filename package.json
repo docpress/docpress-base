@@ -26,6 +26,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
+    "watch": "mocha -R min --watch",
     "test:build": "cd fixture/onmount && node metalsmith.js",
     "test:serve": "ss fixture/onmount/_bookdown"
   }
