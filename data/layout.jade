@@ -13,7 +13,8 @@ doctype html
 html
   head
     meta(charset='utf-8')
-    link(rel='stylesheet' href=(base + 'assets/style.css'))
+    link(rel='stylesheet' href=(base + 'assets/style.css?t=' + (+new Date())))
+    title= title
   body
     .doc-layout
       .body
@@ -21,3 +22,4 @@ html
           != contents
       .menu.toc-menu
         +menu(toc, 0)
+    script(src=(base + 'assets/script.js?t=' + (+new Date())))

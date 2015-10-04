@@ -13,10 +13,13 @@ const sass = require('node-sass')
 
 module.exports = function base (options) {
   var app = ware()
+    .use(addJs)
     .use(addCss)
     .use(relayout)
 
-  return app.run.bind(app)
+  return function (files, ms, done) {
+    app.run(files, ms, done)
+  }
 }
 
 /**
@@ -38,6 +41,19 @@ function addCss (files, ms, done) {
 
   files['assets/style.css'] = { contents: css }
   done()
+}
+
+function addJs (files, ms, done) {
+  const fname = join(__dirname, 'data/script.js')
+  const concat = require('concat-stream')
+  const browserify = require('browserify')
+  const b = browserify()
+  b.add(fname)
+  b.bundle((err, buffer) => {
+    if (err) return done(err)
+    files['assets/script.js'] = { contents: buffer }
+    done()
+  })
 }
 
 /**
