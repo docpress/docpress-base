@@ -31,7 +31,13 @@ module.exports = function base (options) {
 function addCss (files, ms, done) {
   buildCss((err, contents) => {
     if (err) return done(err)
-    files['assets/style.css'] = { contents }
+    if (!files['assets/style.css']) {
+      files['assets/style.css'] = { contents }
+    } else {
+      console.log('custom')
+      files['assets/style.css'].contents = contents + '\n' +
+        files['assets/style.css'].contents
+    }
     done()
   })
 }
@@ -39,7 +45,12 @@ function addCss (files, ms, done) {
 function addJs (files, ms, done) {
   buildJs((err, contents) => {
     if (err) return done(err)
-    files['assets/script.js'] = { contents }
+    if (!files['assets/script.js']) {
+      files['assets/script.js'] = { contents }
+    } else {
+      files['assets/script.js'].contents = contents + '\n' +
+        files['assets/script.js'].contents
+    }
     done()
   })
 }
