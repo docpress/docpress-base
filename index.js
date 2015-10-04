@@ -2,10 +2,12 @@
 
 const ware = require('ware')
 const fs = require('fs')
-const join = require('path').join
 const jade = require('jade')
+const join = require('path').join
 const assign = Object.assign
-const sass = require('node-sass')
+
+const buildJs = require('./lib/build_js')
+const buildCss = require('./lib/build_css')
 
 /**
  * Metalsmith middleware
@@ -27,31 +29,17 @@ module.exports = function base (options) {
  */
 
 function addCss (files, ms, done) {
-  const result = sass.renderSync({
-    includePaths: [ join(__dirname, 'node_modules') ],
-    file: join(__dirname, 'data/style.sass'),
-    outputStyle: 'compact'
+  buildCss((err, contents) => {
+    if (err) return done(err)
+    files['assets/style.css'] = { contents }
+    done()
   })
-
-  const postcss = require('postcss')
-  const autoprefixer = require('autoprefixer')({})
-
-  let css = result.css
-  css = postcss([autoprefixer]).process(css).css
-
-  files['assets/style.css'] = { contents: css }
-  done()
 }
 
 function addJs (files, ms, done) {
-  const fname = join(__dirname, 'data/script.js')
-  const concat = require('concat-stream')
-  const browserify = require('browserify')
-  const b = browserify()
-  b.add(fname)
-  b.bundle((err, buffer) => {
+  buildJs((err, contents) => {
     if (err) return done(err)
-    files['assets/script.js'] = { contents: buffer }
+    files['assets/script.js'] = { contents }
     done()
   })
 }

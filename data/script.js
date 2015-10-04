@@ -12,6 +12,11 @@ new Pjax({
 document.addEventListener('pjax:send', function () {
   Nprogress.start()
 })
+
+document.addEventListener('pjax:error', function () {
+  Nprogress.done()
+})
+
 document.addEventListener('pjax:complete', function () {
   Nprogress.done()
 })
