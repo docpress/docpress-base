@@ -10,9 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "6.0.3",
-    "autoprefixer-core": "6.0.1",
     "browserify": "11.2.0",
-    "concat-stream": "1.5.0",
     "github-markdown-css": "2.0.10",
     "jade": "1.11.0",
     "node-sass": "3.3.3",
