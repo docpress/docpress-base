@@ -4,9 +4,10 @@ const fixture = require('./support/fixture')
 
 describe('fixture', function () {
   let app, data
+  let fx = fixture('onmount')
 
   before(function (done) {
-    app = require(fixture('onmount/metalsmith.js'))
+    app = require(fx.path('metalsmith.js'))
     app.build((err) => {
       if (err) return done(err)
       done()
@@ -15,7 +16,7 @@ describe('fixture', function () {
 
   describe('index.html', function () {
     before(function () {
-      data = fixture.file('onmount/_bookdown/index.html')
+      data = fx.read('_bookdown/index.html')
     })
 
     it('renders as html', function () {
@@ -27,18 +28,22 @@ describe('fixture', function () {
 
   describe('style.css', function () {
     before(function () {
-      data = fixture.file('onmount/_bookdown/assets/style.css')
+      data = fx.read('_bookdown/assets/style.css')
     })
 
     it('works', function () {
       expect(data).toInclude('.markdown-body')
       expect(data).toInclude('.toc-menu')
     })
+
+    it('renders custom css', function () {
+      expect(data).toInclude('fira sans')
+    })
   })
 
   describe('script.js', function () {
     before(function () {
-      data = fixture.file('onmount/_bookdown/assets/script.js')
+      data = fx.read('_bookdown/assets/script.js')
     })
 
     it('works', function () {
@@ -46,5 +51,8 @@ describe('fixture', function () {
       expect(data).toInclude('pjax:complete')
       expect(data).toInclude('Nprogress')
     })
-  })
+
+    it('renders custom js', function () {
+      expect(data).toInclude('/* custom */')
+    }) })
 })

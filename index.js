@@ -34,7 +34,6 @@ function addCss (files, ms, done) {
     if (!files['assets/style.css']) {
       files['assets/style.css'] = { contents }
     } else {
-      console.log('custom')
       files['assets/style.css'].contents = contents + '\n' +
         files['assets/style.css'].contents
     }
