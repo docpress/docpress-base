@@ -1,11 +1,12 @@
 'use strict'
+
 const fixture = require('./support/fixture')
 
 describe('fixture', function () {
   let app, data
 
   before(function (done) {
-    app = require('../fixture/onmount/metalsmith')
+    app = require(fixture('onmount/metalsmith.js'))
     app.build((err) => {
       if (err) return done(err)
       done()

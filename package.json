@@ -1,13 +1,7 @@
 {
   "name": "bookdown-base",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "mocha"
-  },
-  "author": "",
-  "license": "ISC",
+  "author": "Rico Sta. Cruz <rico@ricostacruz.com>",
   "dependencies": {
     "autoprefixer": "6.0.3",
     "browserify": "11.2.0",
@@ -26,5 +20,10 @@
     "mocha": "2.3.3",
     "mocha-standard": "1.0.0",
     "standard": "5.3.1"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
   }
 }
