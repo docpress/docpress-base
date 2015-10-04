@@ -1,4 +1,4 @@
-var bookdown = require('bookdown')
+var bookdown = require('bookdown-core')
 
 var app = bookdown(__dirname)
   .use(require('../../')())

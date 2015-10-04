@@ -1,8 +1,23 @@
+mixin menu(m, depth)
+  li.menu-item(class=('-level-' + depth))
+    if m.url
+      a.link.title(href=(base + m.url))= m.title
+    else if m.title
+      span.title= m.title
+    if m.sections
+      ul.submenu
+        - for (var key in m.sections)
+          +menu(m.sections[key], depth + 1)
+
 doctype html
 html
   head
     meta(charset='utf-8')
     link(rel='stylesheet' href=(base + 'assets/style.css'))
   body
-    .markdown-body
-      != contents
+    .doc-layout
+      .menu.toc-menu
+        +menu(toc, 0)
+      .body
+        .markdown-body
+          != contents

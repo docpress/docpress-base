@@ -1,3 +1,5 @@
+'use strict'
+
 const ware = require('ware')
 const fs = require('fs')
 const join = require('path').join
@@ -13,7 +15,6 @@ module.exports = function base (options) {
   var app = ware()
     .use(addAssets)
     .use(relayout)
-    .use(require('metalsmith-sass'))
 
   return app.run.bind(app)
 }
@@ -29,7 +30,13 @@ function addAssets (files, ms, done) {
     outputStyle: 'compact'
   })
 
-  files['assets/style.css'] = { contents: result.css }
+  const postcss = require('postcss')
+  const autoprefixer = require('autoprefixer')({})
+
+  let css = result.css
+  css = postcss([autoprefixer]).process(css).css
+
+  files['assets/style.css'] = { contents: css }
   done()
 }
 
@@ -38,6 +45,8 @@ function addAssets (files, ms, done) {
  */
 
 function relayout (files, ms, done) {
+  const toc = JSON.parse(files['toc.json'].contents)
+  const index = JSON.parse(files['index.json'].contents)
   const path = fs.readFileSync(join(__dirname, 'data/layout.jade'), 'utf-8')
   const layout = jade.compile(path)
 
@@ -45,7 +54,9 @@ function relayout (files, ms, done) {
     if (!fname.match(/\.html$/)) return
     const file = files[fname]
     const base = Array(fname.split('/').length).join('../')
-    file.contents = layout(assign({}, file, { base }))
+    file.contents = layout(assign({}, file, {
+      base, toc, index
+    }))
   })
 
   done()
