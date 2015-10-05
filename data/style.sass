@@ -2,6 +2,10 @@
 @import './github-markdown-css/github-markdown'
 @import './nprogress/nprogress'
 
+$black: #111
+$slate: #678
+$accent: #4078C0
+
 html, body
   height: 100%
 
@@ -36,7 +40,7 @@ html, body
 
   &
     padding: 32px 0
-    background: #fdfdfd
+    // background: #fdfefe
     box-shadow: inset -1px 0 #f3f3f3
     font-size: 0.9em
 
@@ -60,22 +64,23 @@ html, body
 
   .link
     &, &:visited
-      color: #555
+      color: $slate
       text-decoration: none
       position: relative
       transition: background-color 200ms linear, color 500ms linear
 
     &:hover
-      background-color: rgba(dodgerblue, 0.02)
+      background-color: rgba($accent, 0.02)
+      color: darken($slate, 20%)
       transition: none
 
     &:active
-      background-color: rgba(dodgerblue, 0.04)
-      color: #111
+      background-color: rgba($accent, 0.1)
+      color: $black
       transition: none
 
     &.-active
-      border-right: solid 2px dodgerblue
+      border-right: solid 2px $accent
 
   // First thing
   .-level-1:first-child > .title
@@ -90,6 +95,26 @@ html, body
   .-level-4 .title
     padding-left: $pad + 8px * 2
 
+//
+// Markdown body
+//
+
 .markdown-body
   margin: 40px auto
   max-width: 768px
+
+//
+// Nprogress
+//
+
+#nprogress
+  .bar
+    background: $accent
+
+  .peg
+    box-shadow: 0 0 10px $accent, 0 0 5px $accent
+    display: block
+
+  .spinner-icon
+    border-top-color: $accent
+    border-left-color: $accent
