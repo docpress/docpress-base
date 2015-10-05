@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "expect": "1.11.1",
+    "istanbul": "0.3.21",
     "metalsmith": "2.1.0",
     "mocha": "2.3.3",
     "mocha-standard": "1.0.0",
@@ -28,6 +29,7 @@
     "test": "mocha",
     "watch": "mocha -R min --watch",
     "test:build": "cd fixture/onmount && node metalsmith.js",
-    "test:serve": "ss fixture/onmount/_bookdown"
+    "test:serve": "ss fixture/onmount/_bookdown",
+    "coverage": "istanbul cover _mocha -x **/fixture/** -- -R spec"
   }
 }
