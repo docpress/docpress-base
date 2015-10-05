@@ -36,13 +36,14 @@ html, body
       order: 2
 
 .toc-menu
-  $pad: 32px
+  $pad: 24px
 
   &
-    padding: 32px 0
+    padding: ($pad - 4px) 0
     // background: #fdfefe
     box-shadow: inset -1px 0 #f3f3f3
     font-size: 0.9em
+    transition: opacity 1500ms linear
 
   ul, li
     margin: 0
@@ -96,11 +97,24 @@ html, body
     padding-left: $pad + 8px * 2
 
 //
+// Hover fade
+//
+
+.toc-menu.-faded
+  .title:not(.-active)
+    opacity: 0.2
+    transition: opacity 1500ms linear
+
+  &:hover .title
+    opacity: 1
+    transition: opacity 200ms linear
+
+//
 // Markdown body
 //
 
 .markdown-body
-  margin: 40px auto
+  margin: 24px auto
   max-width: 768px
 
 //
