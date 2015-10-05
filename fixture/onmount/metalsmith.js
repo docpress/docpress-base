@@ -1,5 +1,5 @@
-var app = require('bookdown-core/ms')(__dirname)
-  .use(require('bookdown-core')())
+var app = require('docpress-core/ms')(__dirname)
+  .use(require('docpress-core')())
   .use(require('../../')())
 
 if (module.parent) {

@@ -1,5 +1,5 @@
 {
-  "name": "bookdown-base",
+  "name": "docpress-base",
   "version": "1.0.0",
   "author": "Rico Sta. Cruz <rico@ricostacruz.com>",
   "dependencies": {
@@ -29,7 +29,7 @@
     "test": "mocha",
     "watch": "mocha -R min --watch",
     "test:build": "cd fixture/onmount && node metalsmith.js",
-    "test:serve": "ss fixture/onmount/_bookdown",
+    "test:serve": "ss fixture/onmount/_docpress",
     "coverage": "istanbul cover _mocha -x **/fixture/** -- -R spec"
   }
 }

@@ -16,7 +16,7 @@ describe('fixture', function () {
 
   describe('index.html', function () {
     before(function () {
-      data = fx.read('_bookdown/index.html').toLowerCase()
+      data = fx.read('_docpress/index.html').toLowerCase()
     })
 
     it('renders as html', function () {
@@ -32,7 +32,7 @@ describe('fixture', function () {
 
   describe('style.css', function () {
     before(function () {
-      data = fx.read('_bookdown/assets/style.css')
+      data = fx.read('_docpress/assets/style.css')
     })
 
     it('works', function () {
@@ -47,7 +47,7 @@ describe('fixture', function () {
 
   describe('script.js', function () {
     before(function () {
-      data = fx.read('_bookdown/assets/script.js')
+      data = fx.read('_docpress/assets/script.js')
     })
 
     it('works', function () {
