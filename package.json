@@ -1,7 +1,11 @@
 {
   "name": "docpress-base",
+  "description": "Base theme for Docpress.",
   "version": "1.0.0",
   "author": "Rico Sta. Cruz <rico@ricostacruz.com>",
+  "bugs": {
+    "url": "https://github.com/docpress/docpress-base/issues"
+  },
   "dependencies": {
     "autoprefixer": "6.0.3",
     "browserify": "11.2.0",
@@ -23,13 +27,21 @@
     "standard": "5.3.1",
     "superstatic": "2.2.1"
   },
+  "directories": {
+    "test": "test"
+  },
+  "homepage": "https://github.com/docpress/docpress-base#readme",
   "license": "MIT",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/docpress/docpress-base.git"
+  },
   "scripts": {
+    "coverage": "istanbul cover _mocha -x **/fixture/** -- -R spec",
     "test": "mocha",
-    "watch": "mocha -R min --watch",
     "test:build": "cd fixture/onmount && node metalsmith.js",
     "test:serve": "ss fixture/onmount/_docpress",
-    "coverage": "istanbul cover _mocha -x **/fixture/** -- -R spec"
+    "watch": "mocha -R min --watch"
   }
 }
