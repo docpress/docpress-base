@@ -15,8 +15,9 @@ html
     meta(charset='utf-8')
     link(rel='stylesheet' href=(base + 'assets/style.css?t=' + (+new Date())))
     title= title
-  body
+  body.-menu-visible
     .doc-layout
+      .toggle.menu-toggle.js-menu-toggle
       .body
         .markdown-body
           != contents

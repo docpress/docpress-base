@@ -4,6 +4,7 @@ var Nprogress = require('nprogress')
 var hljs = require('highlight.js')
 var onmount = require('onmount')
 var each = require('dom101').each
+var toggleClass = require('dom101').toggleClass
 var ready = require('dom101').ready
 
 /*
@@ -54,6 +55,16 @@ onmount('pre > code', function () {
 })
 
 /*
+ * menu toggle
+ */
+
+onmount('.js-menu-toggle', function () {
+  this.addEventListener('click', function () {
+    toggleClass(document.body, '-menu-visible')
+  })
+})
+
+/*
  * onmount
  */
 
@@ -66,4 +77,3 @@ void (function () {
     onmount()
   })
 }())
-
