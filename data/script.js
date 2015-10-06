@@ -3,9 +3,10 @@ var Pjax = require('pjax')
 var Nprogress = require('nprogress')
 var hljs = require('highlight.js')
 var onmount = require('onmount')
-var each = require('dom101').each
-var toggleClass = require('dom101').toggleClass
-var ready = require('dom101').ready
+var each = require('dom101/each')
+var toggleClass = require('dom101/toggle-class')
+var ready = require('dom101/ready')
+var Scrolltrack = require('./scrolltrack')
 
 /*
  * pjax/nprogress
@@ -75,5 +76,32 @@ void (function () {
 
   document.addEventListener('pjax:complete', function () {
     onmount()
+  })
+}())
+
+/*
+ * scrolltrack
+ */
+
+void (function () {
+  var st = new Scrolltrack({
+    menu: '.toc-menu',
+    onupdate: function (active, last) {
+      var menu = document.querySelector('.toc-menu')
+      var link = menu.querySelector('.link.-active, .link.-notactive')
+
+      if (link) {
+        toggleClass(link, '-active', !active)
+        toggleClass(link, '-notactive', active)
+      }
+    }
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    st.update()
+  })
+
+  ready(function () {
+    st.update()
   })
 }())

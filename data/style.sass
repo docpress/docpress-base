@@ -73,21 +73,23 @@ html
 
   .link, .hlink
     &
-      transition: background-color 200ms linear, color 500ms linear
+      transition: background-color 200ms linear, color 500ms linear, box-shadow 200ms linear
+      box-shadow: inset -2px 0 rgba($accent, 0)
       box-sizing: content-box
 
     &:hover
       background-color: rgba($accent, 0.02)
       color: darken($slate, 20%)
-      transition: none
+      transition: box-shadow 200ms linear
 
     &:active
       background-color: rgba($accent, 0.1)
       color: $black
-      transition: none
+      transition: box-shadow 200ms linear
 
     &.-active
-      border-right: solid 2px $accent
+      box-shadow: inset -2px 0 $accent
+      transition: background-color 200ms linear, color 500ms linear
 
   // The readme
   .-level-1:first-child
