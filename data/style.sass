@@ -185,25 +185,34 @@ ul.heading-list
 
 .menu-toggle
   $size: 40px
+
   &
+    display: none
+
+  @media (min-width: 769px)
     display: block
     width: $size + 12px
     height: $size + 12px
     line-height: $size
 
-    position: absolute
+    position: fixed
     padding-left: 12px
     left: 0
     bottom: 0
     color: $black
-    transition: color 400ms linear
     border-radius: 3px
     z-index: 10
     cursor: pointer
+    background-color: transparent
+
+  &
+    // keep the white visible
+    transition: width 1ms linear 250ms, background-color 1ms linear 250ms, color 400ms linear
 
   .-menu-visible &
     width: $nav-width - 1px - 20px
-    background: $bg
+    background-color: $bg
+    transition: color 400ms linear
 
   &:before
     display: inline-block
@@ -213,7 +222,7 @@ ul.heading-list
 
   &:hover
     color: $accent
-    transition: color 100ms linear
+    // transition: width 0 linear 250ms, background-color 0 linear 250ms, color 100ms linear
 
 //
 // Search (to do)
@@ -230,7 +239,7 @@ ul.heading-list
 
     position: absolute
     right: 24px - 14px
-    top: 24px - 4px
+    top: 24px - 8px
     color: $slate
     transition: color 400ms linear
     border-radius: 3px
@@ -242,32 +251,33 @@ ul.heading-list
 //
 
 @media (min-width: 960px)
-  html, body
-    overflow: hidden
-
   .doc-layout
-    &
-      display: flex
-
     .menu
-      flex: 0 0 $nav-width
+      width: $nav-width
+      position: fixed
+      top: 0
+      left: 0
       overflow-y: auto
-      order: 1
 
     .body
-      flex: 1
       overflow-y: auto
       padding-top: 32px
-      order: 2
+      transition: all 250ms ease-in
 
     .menu
-      display: none
-
-    .-menu-visible & .menu
       display: block
+      transform: translate3d(-1 * $nav-width, 0, 0)
+      transition: all 250ms ease-in
 
-      // compensate for toggle button
-      &:after
-        content: ''
-        display: block
-        height: 64px
+    .-menu-visible &
+      .body
+        padding-left: $nav-width
+
+      .menu
+        transform: translate3d(0, 0, 0)
+
+        // compensate for toggle button
+        &:after
+          content: ''
+          display: block
+          height: 64px
