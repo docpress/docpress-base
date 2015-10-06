@@ -5,12 +5,20 @@
 
 @include ion-font
 
+$bg: white
 $black: #111
 $slate: #678
 $accent: #4078C0
+$nav-width: 250px
+
+*
+  box-sizing: border-box
 
 html, body
   height: 100%
+
+html
+  background: $bg
 
 .doc-layout
   width: 100%
@@ -18,31 +26,6 @@ html, body
 
   .body
     padding: 16px
-
-@media (min-width: 960px)
-  html, body
-    overflow: hidden
-
-  .doc-layout
-    &
-      display: flex
-
-    .menu
-      flex: 0 0 250px
-      overflow-y: auto
-      order: 1
-
-    .body
-      flex: 1
-      overflow-y: auto
-      padding-top: 32px
-      order: 2
-
-    .menu
-      display: none
-
-    .-menu-visible & .menu
-      display: block
 
 //
 // Menu
@@ -71,6 +54,7 @@ html, body
     text-overflow: ellipsis
     overflow: hidden
     white-space: nowrap
+    box-sizing: content-box
 
   .-level-1.-parent > .title
     margin-top: 16px
@@ -86,6 +70,7 @@ html, body
   .link, .hlink
     &
       transition: background-color 200ms linear, color 500ms linear
+      box-sizing: content-box
 
     &:hover
       background-color: rgba($accent, 0.02)
@@ -197,28 +182,37 @@ ul.heading-list
 //
 
 .menu-toggle
+  $size: 40px
   &
     display: block
-    width: 40px
-    height: 40px
-    line-height: 40px
-    text-align: center
+    width: $nav-width - 1px - 20px
+    height: $size
+    line-height: $size
 
     position: absolute
-    left: 24px - 12px
+    padding-left: 24px - 12px
+    left: 0
     bottom: 24px - 12px
     color: $black
     transition: color 400ms linear
     border-radius: 3px
     z-index: 10
     cursor: pointer
+    background: $bg
 
   &:before
+    display: inline-block
     @include ion-icon('navicon', 24px)
+    text-align: center
+    width: $size
 
   &:hover
     color: $accent
     transition: color 100ms linear
+
+//
+// Search (to do)
+//
 
 .toc-menu
   &:before
@@ -237,3 +231,38 @@ ul.heading-list
     border-radius: 3px
     z-index: 10
     cursor: pointer
+
+//
+// Desktop layout
+//
+
+@media (min-width: 960px)
+  html, body
+    overflow: hidden
+
+  .doc-layout
+    &
+      display: flex
+
+    .menu
+      flex: 0 0 $nav-width
+      overflow-y: auto
+      order: 1
+
+    .body
+      flex: 1
+      overflow-y: auto
+      padding-top: 32px
+      order: 2
+
+    .menu
+      display: none
+
+    .-menu-visible & .menu
+      display: block
+
+      // compensate for toggle button
+      &:after
+        content: ''
+        display: block
+        height: 64px
