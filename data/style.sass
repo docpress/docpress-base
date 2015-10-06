@@ -7,7 +7,7 @@
 
 $bg: white
 $black: #111
-$slate: #678
+$slate: #505d6b
 $accent: #4078C0
 $nav-width: 250px
 
@@ -56,6 +56,9 @@ html
     white-space: nowrap
     box-sizing: content-box
 
+  .-level-1.-parent
+    margin-bottom: 16px
+
   .-level-1.-parent > .title
     margin-top: 16px
     font-weight: bold
@@ -86,12 +89,19 @@ html
     &.-active
       border-right: solid 2px $accent
 
-  // First thing
+  // The readme
+  .-level-1:first-child
+    margin-bottom: 16px
+
+  // The readme's headings
+  .-level-1:first-child > .heading-list
+    margin-top: 16px
+
+  // The readme's title
   .-level-1:first-child > .title
     margin-top: 0
     font-size: 1.5em
     font-weight: 300
-    margin-bottom: 16px
     color: $black
 
   .-level-3 .title
