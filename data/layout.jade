@@ -4,10 +4,19 @@ mixin menu(m, depth)
       a.link.title(href=(base + m.url) class=((active === m.url ? '-active' : '') + (' link-' + m.slug)))= m.title
     else if m.title
       span.title= m.title
+    if m.headings && m.url === active
+      ul.headings.heading-list
+        - for (var key in m.headings)
+          +heading(m.headings[key])
     if m.sections
       ul.submenu
         - for (var key in m.sections)
           +menu(m.sections[key], depth + 1)
+
+mixin heading(h)
+  li.heading-item
+    a.hlink(href=('#' + h.id) class=('-depth-' + h.depth))
+      = h.title
 
 doctype html
 html

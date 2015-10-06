@@ -56,7 +56,7 @@ html, body
     padding: ($pad - 4px) 0
     // background: #fdfefe
     box-shadow: inset -1px 0 #f3f3f3
-    font-size: 0.9em
+    font-size: 13px
     transition: opacity 1500ms linear
 
   ul, li
@@ -66,7 +66,7 @@ html, body
 
   .title
     display: block
-    padding: 8px $pad
+    padding: 7px $pad
     height: 1em
     text-overflow: ellipsis
     overflow: hidden
@@ -82,6 +82,9 @@ html, body
       color: $slate
       text-decoration: none
       position: relative
+
+  .link, .hlink
+    &
       transition: background-color 200ms linear, color 500ms linear
 
     &:hover
@@ -109,6 +112,38 @@ html, body
 
   .-level-4 .title
     padding-left: $pad + 8px * 2
+
+//
+// Headings menu
+//
+
+ul.heading-list
+  $pad: 24px
+
+  &
+    margin-bottom: 16px
+
+  .hlink
+    text-decoration: none
+    padding: 6px $pad
+    display: block
+    height: 1em
+    text-overflow: ellipsis
+    overflow: hidden
+    white-space: nowrap
+
+    &, &:visited
+      color: $slate
+
+  .hlink:before
+    content: ''
+    display: inline-block
+    vertical-align: middle
+    margin-right: 8px
+    height: 2px
+    width: 12px
+    background: $slate
+    opacity: 0.3
 
 //
 // Hover fade
