@@ -3,6 +3,8 @@
 const fixture = require('./support/fixture')
 
 describe('fixture', function () {
+  this.timeout(10000)
+
   let app, data
   let fx = fixture('onmount')
 
@@ -23,10 +25,14 @@ describe('fixture', function () {
       expect(data).toInclude('<!doctype html>')
       expect(data).toInclude('markdown-body')
       expect(data).toInclude('toc-menu')
+      expect(data).toInclude('body page-index') // slug
     })
 
     it('highlights current menu item', function () {
-      expect(data).toMatch(/-active['"]>onmount/)
+      expect(data).toMatch(/-active[^>]+>onmount/)
+    })
+    it('adds "link-slug" classes', function () {
+      expect(data).toMatch(/link-index[^>]+>onmount/)
     })
   })
 

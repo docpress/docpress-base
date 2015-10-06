@@ -1,7 +1,7 @@
 mixin menu(m, depth)
   li.menu-item(class=('-level-' + depth + (m.sections ? ' -parent' : '')))
     if m.url
-      a.link.title(href=(base + m.url) class=(active === m.url ? '-active' : ''))= m.title
+      a.link.title(href=(base + m.url) class=((active === m.url ? '-active' : '') + (' link-' + m.slug)))= m.title
     else if m.title
       span.title= m.title
     if m.sections
@@ -18,7 +18,7 @@ html
   body.-menu-visible
     .doc-layout
       .toggle.menu-toggle.js-menu-toggle
-      .body
+      .body(class=('page-' + slug))
         .markdown-body
           != contents
       .menu.toc-menu
