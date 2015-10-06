@@ -187,19 +187,22 @@ ul.heading-list
   $size: 40px
   &
     display: block
-    width: $nav-width - 1px - 20px
-    height: $size
+    width: $size + 12px
+    height: $size + 12px
     line-height: $size
 
     position: absolute
-    padding-left: 24px - 12px
+    padding-left: 12px
     left: 0
-    bottom: 24px - 12px
+    bottom: 0
     color: $black
     transition: color 400ms linear
     border-radius: 3px
     z-index: 10
     cursor: pointer
+
+  .-menu-visible &
+    width: $nav-width - 1px - 20px
     background: $bg
 
   &:before
