@@ -6,8 +6,8 @@ describe('to do', function () {
   it('custom CSS/JS', done)
   it('active menu highlight', done)
   it('syntax highlighting', done)
-  it('custom sass/scss')
-  it('sidebar toggle')
+  it('custom sass/scss', done)
+  it('sidebar toggle', done)
 })
 
 function done () {}
