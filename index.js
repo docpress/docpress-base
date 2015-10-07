@@ -29,14 +29,23 @@ module.exports = function base (options) {
  */
 
 function addCss (files, ms, done) {
-  buildCss((err, contents) => {
+  if (files['assets/style.css']) return done()
+
+  function getAssetFile (file) {
+    return files[file] &&
+      ms.path(ms.source(), ms.metadata().docs, file)
+  }
+
+  buildCss({
+    before:
+      getAssetFile('assets/variables.scss') ||
+      getAssetFile('assets/variables.sass'),
+    after:
+      getAssetFile('assets/custom.scss') ||
+      getAssetFile('assets/custom.sass')
+  }, (err, contents) => {
     if (err) return done(err)
-    if (!files['assets/style.css']) {
-      files['assets/style.css'] = { contents }
-    } else {
-      files['assets/style.css'].contents = contents + '\n' +
-        files['assets/style.css'].contents
-    }
+    files['assets/style.css'] = { contents }
     done()
   })
 }
