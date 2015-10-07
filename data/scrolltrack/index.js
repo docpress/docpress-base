@@ -18,13 +18,14 @@ function Scrolltrack (options) {
   if (!(this instanceof Scrolltrack)) return new Scrolltrack(options)
   if (!options) options = {}
 
-  this.selectors = options.selectors || 'h1, h2, h3, h4, h5, h6'
+  this.selector = options.selector || 'h1, h2, h3, h4, h5, h6'
   this.parent = options.parent || document
   this.onupdate = options.onupdate || function () {}
   this.menu = options.menu || document
   this.scrollParent = options.scrollParent || document
+  this.offsetPercent = options.offsetPercent || 0.1
 
-  this.listener = debounce(this.onScroll, 20).bind(this)
+  this.listener = debounce(this.onScroll, 5).bind(this)
   this.update = debounce(this._update, 20).bind(this)
   this.active = undefined
   this.index = []
@@ -58,7 +59,7 @@ Scrolltrack.prototype.destroy = function () {
  */
 
 Scrolltrack.prototype.reindex = function () {
-  var headings = this.parent.querySelectorAll(this.selectors)
+  var headings = this.parent.querySelectorAll(this.selector)
   var index = this.index = []
   var ids = {}
 
@@ -126,11 +127,19 @@ Scrolltrack.prototype.onScroll = function () {
 Scrolltrack.prototype.scrollTop = function () {
   var y = scrollTop()
   var offset = 0
+  var k = this.offsetPercent
 
   if (this.metrics) {
-    var percent = y /
-      (this.metrics.documentHeight - this.metrics.windowHeight)
-    offset = Math.pow(percent, 6) * this.metrics.windowHeight
+    var screen = this.metrics.windowHeight
+    var maxY = this.metrics.documentHeight - screen
+    var fold = maxY - screen * 1.2
+
+    if (y > fold) {
+      var lastPercent = (y - fold) / screen
+      offset = screen * (k + (1 - k) * lastPercent)
+    } else {
+      offset = screen * k
+    }
   }
 
   return y + offset
@@ -142,12 +151,14 @@ Scrolltrack.prototype.scrollTop = function () {
  */
 
 Scrolltrack.prototype.follow = function (heading, last) {
-  if (last && last.link) {
-    toggleClass(last.link, '-active', false)
+  if (this.lastlink) {
+    toggleClass(this.lastlink, '-active', false)
+    this.lastlink = null
   }
 
   if (heading && heading.link) {
     toggleClass(heading.link, '-active', true)
+    this.lastlink = heading.link
   }
 }
 

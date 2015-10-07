@@ -86,14 +86,13 @@ void (function () {
 void (function () {
   var st = new Scrolltrack({
     menu: '.toc-menu',
+    selector: 'h2, h3',
     onupdate: function (active, last) {
       var menu = document.querySelector('.toc-menu')
       var link = menu.querySelector('.link.-active, .link.-notactive')
 
-      if (link) {
-        toggleClass(link, '-active', !active)
-        toggleClass(link, '-notactive', active)
-      }
+      toggleClass(link, '-active', !active)
+      toggleClass(link, '-notactive', active)
     }
   })
 
