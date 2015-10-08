@@ -1,26 +1,57 @@
+//- Menu:
+//- renders the menu item recursively
+
 mixin menu(m, depth)
   li.menu-item(class=('-level-' + depth + (m.sections ? ' -parent' : '')))
     if m.url
       a.link.title(href=(base + m.url) class=((active === m.url ? '-active' : '') + (' link-' + m.slug)))= m.title
     else if m.title
       span.title= m.title
-    if m.headings && m.url === active
+
+    //- Headings
+    if m.headings && m.url === active && !m.expand
       ul.headings.heading-list
         - for (var key in m.headings)
-          +heading(m.headings[key])
+          +heading(m.headings[key], 0)
+
+    //- Sub-pages
     if m.sections
       ul.submenu
         - for (var key in m.sections)
           +menu(m.sections[key], depth + 1)
 
-mixin heading(h)
-  li.heading-item
-    a.hlink(href=('#' + h.id) class=('-depth-' + h.depth))
+  //- Headings as subpages
+  if m.headings && m.url === active && m.expand
+    - for (var key in m.headings)
+      +heading-menu(m.headings[key], depth)
+
+//- Heading:
+//- renders the heading item recursively
+
+mixin heading(h, depth)
+  li.heading-item(class=('-depth-' + h.depth))
+    a.hlink(href=('#' + h.id) class=('link-' + h.id))
       = h.title
     if h.headings
       ul.heading-list(class=('-depth-' + h.depth))
         - for (var key in h.headings)
-          +heading(h.headings[key])
+          +heading(h.headings[key], depth + 1)
+
+//- Heading-menu:
+//- Renders the heading item recursively, but in the markup of a regular menu.
+//- Used for single-page sites
+
+mixin heading-menu(h, depth)
+  li.menu-item(class=('-level-' + depth + (h.headings ? ' -parent' : '')))
+    a.link.title(href=('#' + h.id) class=('link-' + h.id))
+      = h.title
+    if h.headings
+      ul.submenu
+        - for (var key in h.headings)
+          +heading-menu(h.headings[key], depth + 1)
+//-
+//- html
+//-
 
 doctype html
 html
