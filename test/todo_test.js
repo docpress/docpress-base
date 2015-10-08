@@ -8,6 +8,8 @@ describe('to do', function () {
   it('syntax highlighting', done)
   it('custom sass/scss', done)
   it('sidebar toggle', done)
+  it('autoscroll the sidebar')
+  it('link to github')
 })
 
 function done () {}
