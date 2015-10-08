@@ -8,6 +8,7 @@ const assign = Object.assign
 
 const buildJs = require('./lib/build_js')
 const buildCss = require('./lib/build_css')
+const hash = require('./lib/hash')
 
 /**
  * Metalsmith middleware
@@ -78,9 +79,14 @@ function relayout (files, ms, done) {
     const file = files[fname]
     const base = Array(fname.split('/').length).join('../')
     file.contents = layout(assign({}, file, {
-      base, toc, index, active: fname
+      base, toc, index, active: fname,
+      hash: {
+        style: hash(files['assets/style.css'].contents),
+        script: hash(files['assets/script.js'].contents)
+      }
     }))
   })
 
   done()
 }
+

@@ -31,8 +31,14 @@ describe('fixture', function () {
     it('highlights current menu item', function () {
       expect(data).toMatch(/-active[^>]+>onmount/)
     })
+
     it('adds "link-slug" classes', function () {
       expect(data).toMatch(/link-index[^>]+>onmount/)
+    })
+
+    it('adds hash to assets', function () {
+      expect(data).toMatch(/script\.js\?t=[a-f0-9]{8}/)
+      expect(data).toMatch(/style\.css\?t=[a-f0-9]{8}/)
     })
   })
 
