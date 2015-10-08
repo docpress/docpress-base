@@ -10,8 +10,16 @@ $black: #111
 $slate: #505d6b
 $accent: #4078C0
 $nav-width: 250px
+$xpad: 24px
 
 // :before:
+
+clearfix()
+  &:after
+    content: ''
+    display: table
+    clear: both
+    zoom: 1
 
 *
   box-sizing: border-box
@@ -161,7 +169,7 @@ ul.heading-list
 //
 
 .markdown-body
-  margin: 24px auto
+  margin: 0 auto
   max-width: 768px
   overflow: visible
 
@@ -259,6 +267,97 @@ ul.heading-list
     cursor: pointer
 
 //
+// Header
+//
+.header-nav
+  &
+    position: relative
+    height: 40px
+    line-height: 40px
+    text-align: center
+
+  .left
+    position: absolute
+    left: 0
+    top: 0
+    text-align: left
+
+  .right
+    position: absolute
+    right: 0
+    top: 0
+    text-align: right
+
+  .iconlink
+    position: relative
+    display: inline-block
+    vertical-align: middle
+    height: 32px
+    line-height: 1em
+    color: rgba($slate, 0.75)
+    transition: all 150ms linear
+
+  .iconlink:hover
+    color: $accent
+
+  .iconlink
+    white-space: nowrap
+    text-decoration: none
+
+  .title
+    font-size: 13px
+    white-space: nowrap
+    margin: 0 8px
+
+    position: relative
+    top: -4px
+
+  // Tooltip
+  .iconlink[data-title]:before
+    content: attr(data-title)
+    display: inline-block
+    position: absolute
+    bottom: -40px
+    right: 0
+    font-size: 12px
+    padding: 3px 10px
+    background: rgba($black, 0.8)
+    color: white
+    border: solid 1px rgba($black, 0.2)
+    border-radius: 2px
+    text-decoration: none
+    height: 22px
+    line-height: 22px
+    width: auto
+    white-space: nowrap
+    pointer-events: none
+    opacity: 0
+    transition: opacity 150ms linear, transform 150ms linear
+    transform: translate3d(0, -8px, 0)
+
+  .iconlink[data-title]:hover:before
+    opacity: 1
+    transform: translate3d(0, 0, 0)
+    pointer-events: auto
+
+  .icon:after
+    font-size: 24px
+    width: 32px
+    height: 32px
+    text-align: center
+
+  .icon
+    color: rgba($slate, 0.5)
+    transition: color 150ms linear
+
+  .iconlink:hover .icon
+    color: $accent
+
+  // Icons
+  .icon.-github:after
+    +ion-icon('social-github')
+
+//
 // Desktop layout
 //
 
@@ -273,8 +372,8 @@ ul.heading-list
       overflow-y: auto
 
     .body
-      padding-top: 32px
-      padding-bottom: 64px
+      padding-top: $xpad
+      padding-bottom: 64px + 24px
       transition: all 250ms ease-in
 
     .menu
@@ -284,7 +383,8 @@ ul.heading-list
 
     .-menu-visible &
       .body
-        padding-left: $nav-width
+        padding-left: $nav-width + $xpad
+        padding-right: $xpad
 
       .menu
         transform: translate3d(0, 0, 0)

@@ -49,6 +49,19 @@ mixin heading-menu(h, depth)
       ul.submenu
         - for (var key in h.headings)
           +heading-menu(h.headings[key], depth + 1)
+
+//-
+//- Heading
+//-
+
+mixin header-nav
+  .header-nav
+    .right
+      if meta.github
+        a.iconlink(href='https://github.com/' + meta.github, data-title=meta.github)
+          span.title Open in GitHub
+          span.icon.-github
+
 //-
 //- html
 //-
@@ -63,6 +76,7 @@ html
     .doc-layout
       .toggle.menu-toggle.js-menu-toggle
       .body(class=('page-' + slug))
+        +header-nav
         .markdown-body
           != contents
       .menu.toc-menu

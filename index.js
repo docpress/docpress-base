@@ -73,13 +73,16 @@ function relayout (files, ms, done) {
   const index = JSON.parse(files['index.json'].contents)
   const path = fs.readFileSync(join(__dirname, 'data/layout.jade'), 'utf-8')
   const layout = jade.compile(path)
+  const meta = ms.metadata()
 
   Object.keys(files).forEach((fname) => {
     if (!fname.match(/\.html$/)) return
     const file = files[fname]
     const base = Array(fname.split('/').length).join('../')
+
     file.contents = layout(assign({}, file, {
-      base, toc, index, active: fname,
+      base, toc, index, meta,
+      active: fname,
       hash: {
         style: hash(files['assets/style.css'].contents),
         script: hash(files['assets/script.js'].contents)
