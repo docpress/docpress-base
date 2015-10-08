@@ -17,6 +17,10 @@ mixin heading(h)
   li.heading-item
     a.hlink(href=('#' + h.id) class=('-depth-' + h.depth))
       = h.title
+    if h.headings
+      ul.heading-list(class=('-depth-' + h.depth))
+        - for (var key in h.headings)
+          +heading(h.headings[key])
 
 doctype html
 html

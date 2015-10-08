@@ -78,6 +78,8 @@ npm install onmount
 bower install onmount
 ```
 
+### Usage info
+
 It can be used as a CommonJS module or on its own. It doesn't require jQuery, but if jQuery is found, it'll attach itself to it as `$.onmount`.
 
 ```js
