@@ -46,6 +46,10 @@ function addCss (files, ms, done) {
       getAssetFile('assets/custom.sass')
   }, (err, contents) => {
     if (err) return done(err)
+    delete files['assets/variables.scss']
+    delete files['assets/variables.sass']
+    delete files['assets/custom.scss']
+    delete files['assets/custom.sass']
     files['assets/style.css'] = { contents }
     done()
   })
