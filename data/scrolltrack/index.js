@@ -41,7 +41,7 @@ function Scrolltrack (options) {
 
 Scrolltrack.prototype.listen = function () {
   q(this.scrollParent).addEventListener('scroll', this.listener)
-  document.addEventListener('resize', this.update)
+  window.addEventListener('resize', this.update)
 }
 
 /**
@@ -50,7 +50,7 @@ Scrolltrack.prototype.listen = function () {
 
 Scrolltrack.prototype.destroy = function () {
   q(this.scrollParent).removeEventListener('scroll', this.listener)
-  document.removeEventListener('resize', this.update)
+  window.removeEventListener('resize', this.update)
 }
 
 /**
@@ -161,6 +161,11 @@ Scrolltrack.prototype.follow = function (heading, last) {
     this.lastlink = heading.link
   }
 }
+
+/**
+ * Internal: helper to normalize between CSS selectors, DOM elements and
+ * jQuery objects.
+ */
 
 function q (el) {
   if (typeof el === 'string') return document.querySelector(el)

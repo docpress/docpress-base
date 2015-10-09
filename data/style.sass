@@ -10,11 +10,12 @@ $black: #111
 $slate: #505d6b
 $accent: #4078C0
 $nav-width: 250px
+$collapsed-nav-width: 64px
 $xpad: 24px
 
 // :before:
 
-clearfix()
+@mixin clearfix
   &:after
     content: ''
     display: table
@@ -271,10 +272,24 @@ ul.heading-list
 //
 .header-nav
   &
-    position: relative
+    position: fixed
+    top: $xpad
+    right: $xpad
+    left: $xpad
     height: 40px
     line-height: 40px
     text-align: center
+
+  .title,
+  .label
+    opacity: 0
+    transition: opacity 250ms linear
+    pointer-events: none
+
+  &.-expanded .title,
+  &.-expanded .label
+    opacity: 1
+    pointer-events: auto
 
   .left
     position: absolute
@@ -304,7 +319,7 @@ ul.heading-list
     white-space: nowrap
     text-decoration: none
 
-  .title
+  .title, .label
     font-size: 13px
     white-space: nowrap
     margin: 0 8px
@@ -358,6 +373,79 @@ ul.heading-list
     +ion-icon('social-github')
 
 //
+// Footer nav
+//
+
+.footer-nav
+  &
+    position: fixed
+    bottom: $xpad
+    right: $xpad
+    left: $xpad
+    height: 24px
+    line-height: 24px
+    +clearfix
+
+  .left
+    float: left
+
+  .right
+    float: right
+
+  .title,
+  .label
+    opacity: 0
+    pointer-events: none
+
+  .title,
+  .label,
+  a:before,
+  a:after
+    transition: opacity 250ms linear, color 250ms linear
+
+  &.-expanded .title,
+  &.-expanded .label
+    opacity: 1
+    pointer-events: auto
+
+  a
+    text-decoration: none
+    font-size: 13px
+    color: $slate
+    transition: color 100ms linear
+
+  .label,
+  .left .title
+    color: rgba($slate, 0.5)
+
+  .right .title
+    font-weight: bold
+    margin-right: 0.1em
+
+  .left a:hover:before,
+  .right a:hover:after
+    color: $accent
+
+  a:hover .title
+    color: $accent
+
+  .left a:before,
+  .right a:after
+    display: inline-block
+    font-size: 20px
+    vertical-align: middle
+    position: relative
+    top: -1px
+
+  .left a:before
+    +ion-icon('chevron-left')
+    margin-right: 16px
+
+  .right a:after
+    +ion-icon('chevron-right')
+    margin-left: 16px
+
+//
 // Desktop layout
 //
 
@@ -372,7 +460,7 @@ ul.heading-list
       overflow-y: auto
 
     .body
-      padding-top: $xpad
+      padding-top: $xpad + 40px
       padding-bottom: 64px + 24px
       transition: all 250ms ease-in
 
@@ -381,7 +469,16 @@ ul.heading-list
       transform: translate3d(-1 * $nav-width, 0, 0)
       transition: all 250ms ease-in
 
+    .header-nav,
+    .footer-nav
+      transition: left 250ms ease-in
+      left: $xpad + $collapsed-nav-width
+
     .-menu-visible &
+      .header-nav,
+      .footer-nav
+        left: $nav-width + $xpad
+
       .body
         padding-left: $nav-width + $xpad
         padding-right: $xpad
@@ -394,3 +491,4 @@ ul.heading-list
           content: ''
           display: block
           height: 64px
+

@@ -45,8 +45,7 @@
   "scripts": {
     "coverage": "istanbul cover _mocha -x **/fixture/** -- -R spec",
     "test": "mocha",
-    "test:build": "cd fixture/onmount && node metalsmith.js",
-    "test:serve": "ss fixture/onmount/_docpress",
+    "serve": "ss fixture/onmount/_docpress",
     "watch": "mocha -R min --watch"
   }
 }

@@ -59,8 +59,21 @@ mixin header-nav
     .right
       if meta.github
         a.iconlink(href='https://github.com/' + meta.github, data-title=meta.github)
-          span.title Open in GitHub
+          // span.title Open in GitHub
           span.icon.-github
+
+mixin footer-nav(prev, next)
+  if prev || next
+    .footer-nav
+      if prev
+        .left
+          a(href=prev.url)
+            span.title= prev.title
+      if next
+        .right
+          a(href=next.url)
+            span.label= "Next: "
+            span.title= next.title
 
 //-
 //- html
@@ -79,6 +92,7 @@ html
         +header-nav
         .markdown-body
           != contents
+        +footer-nav(prev, next)
       .menu.toc-menu
         +menu(toc, 0)
     script(src=(base + 'assets/script.js?t=' + hash.script))

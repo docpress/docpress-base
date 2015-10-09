@@ -9,7 +9,8 @@ describe('to do', function () {
   it('custom sass/scss', done)
   it('sidebar toggle', done)
   it('autoscroll the sidebar')
-  it('link to github')
+  it('link to github', done)
+  it('next/prev', done)
 })
 
 function done () {}

@@ -7,6 +7,7 @@ var each = require('dom101/each')
 var toggleClass = require('dom101/toggle-class')
 var ready = require('dom101/ready')
 var Scrolltrack = require('./scrolltrack')
+var Scrollclass = require('./scrollclass')
 
 /*
  * pjax/nprogress
@@ -102,5 +103,30 @@ void (function () {
 
   ready(function () {
     st.update()
+  })
+}())
+
+void(function () {
+  onmount('.footer-nav', function (b) {
+    b.sc = Scrollclass(this, {
+      className: '-expanded',
+      onscroll: function (y) {
+        console.log(this.maxScroll, y, this.maxScroll - y < 1)
+        return this.maxScroll - y < 1
+      }
+    })
+  }, function (b) {
+    b.sc.destroy()
+  })
+}())
+
+void(function () {
+  onmount('.header-nav', function (b) {
+    b.sc = Scrollclass(this, {
+      className: '-expanded',
+      onscroll: function (y) { return y < 40 }
+    })
+  }, function (b) {
+    b.sc.destroy()
   })
 }())

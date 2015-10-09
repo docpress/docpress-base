@@ -65,7 +65,25 @@ function addJs (files, ms, done) {
 }
 
 /**
- * Layout jade
+ * Layout jade.
+ * Passes these template options:
+ *
+ * * `base` — prefix.
+ * * `toc` — the table of contents, as per toc.json.
+ * * `index` — the index, as per index.json.
+ * * `meta` — metalsmith metadata.
+ * * `prev.title` — previous page title.
+ * * `prev.url` — previous page url.
+ * * `next.title` — next page title.
+ * * `next.url` — next page url.
+ * * `active` — the filename of the active file (eg, `foo/index.html`)
+ * * `hash.style` — hash for style.css
+ * * `hash.script` — hash for script.js
+ *
+ * `meta` typically has:
+ *
+ * * `github` (Optional)
+ * * `docs`
  */
 
 function relayout (files, ms, done) {
@@ -75,13 +93,15 @@ function relayout (files, ms, done) {
   const layout = jade.compile(path)
   const meta = ms.metadata()
 
-  Object.keys(files).forEach((fname) => {
+  eachCons(index, (_, fname, __, prevName, ___, nextName) => {
     if (!fname.match(/\.html$/)) return
     const file = files[fname]
     const base = Array(fname.split('/').length).join('../')
 
     file.contents = layout(assign({}, file, {
       base, toc, index, meta,
+      prev: prevName && assign({}, index[prevName], { url: base + prevName }),
+      next: nextName && assign({}, index[nextName], { url: base + nextName }),
       active: fname,
       hash: {
         style: hash(files['assets/style.css'].contents),
@@ -93,3 +113,13 @@ function relayout (files, ms, done) {
   done()
 }
 
+function eachCons (list, fn) {
+  var keys = Object.keys(list)
+  keys.forEach((key, idx) => {
+    const prevKey = keys[idx - 1]
+    const nextKey = keys[idx + 1]
+    fn(list[key], key,
+       prevKey && list[prevKey], prevKey,
+       nextKey && list[nextKey], nextKey)
+  })
+}
