@@ -4,12 +4,12 @@
 mixin menu(m, depth)
   li.menu-item(class=('-level-' + depth + (m.sections ? ' -parent' : '')))
     if m.url
-      a.link.title(href=(base + m.url) class=((active === m.url ? '-active' : '') + (' link-' + m.slug)))= m.title
+      a.link.title(href=(base + m.url + (m.anchor || '')) class=((active === m.url && !m.anchor ? '-active' : '') + (' link-' + m.slug)))= m.title
     else if m.title
       span.title= m.title
 
     //- Headings
-    if m.headings && m.url === active && !m.expand
+    if m.headings && m.url === active && !m.expand && !m.anchor
       ul.headings.heading-list
         - for (var key in m.headings)
           +heading(m.headings[key], 0)
@@ -21,7 +21,7 @@ mixin menu(m, depth)
           +menu(m.sections[key], depth + 1)
 
   //- Headings as subpages
-  if m.headings && m.url === active && m.expand
+  if m.headings && m.url === active && m.expand && !m.anchor
     - for (var key in m.headings)
       +heading-menu(m.headings[key], depth)
 

@@ -1,6 +1,6 @@
 'use strict'
 
-const fixture = require('./support/fixture')
+const fixture = require('../support/fixture')
 
 describe('fixture', function () {
   this.timeout(10000)
