@@ -268,6 +268,10 @@ ul.heading-list
     z-index: 10
     cursor: pointer
 
+.header-nav,
+.footer-nav
+  font-size: 16px
+
 //
 // Header
 //
@@ -321,7 +325,6 @@ ul.heading-list
     text-decoration: none
 
   .title, .label
-    font-size: 13px
     white-space: nowrap
     margin: 0 8px
 
@@ -366,6 +369,9 @@ ul.heading-list
     color: rgba($slate, 0.5)
     transition: color 150ms linear
 
+  &.-expanded .icon
+    color: $black
+
   .iconlink:hover .icon
     color: $accent
 
@@ -398,32 +404,36 @@ ul.heading-list
     opacity: 0
     pointer-events: none
 
+  // Fly the 'next: ___' from the left
+  .right .title,
+  .right .label
+    transform: translate3d(-32px, 0, 0)
+
   .title,
   .label,
   a:before,
   a:after
-    transition: opacity 250ms linear, color 250ms linear
+    // transition: opacity 250ms linear, color 250ms linear, transform 250ms linear
+    transition: all 250ms ease-in
 
   &.-expanded .title,
   &.-expanded .label
     opacity: 1
+    transform: translate3d(0, 0, 0)
     pointer-events: auto
 
   a
     text-decoration: none
-    font-size: 13px
     color: $slate
-    transition: color 100ms linear
 
-  .label
-    color: rgba($slate, 0.5)
-
+  .label,
   .left .title
-    color: rgba($slate, 0)
+    color: rgba($slate, 0.5)
 
   .right .title
     font-weight: bold
     margin-right: 0.1em
+    color: $black
 
   .left a:hover:before,
   .right a:hover:after
@@ -464,7 +474,7 @@ ul.heading-list
 
     .body
       padding-top: $xpad + 40px
-      padding-bottom: 64px + 24px
+      padding-bottom: 64px + 64px
       transition: all 250ms ease-in
 
     .menu
