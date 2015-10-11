@@ -24,7 +24,7 @@
     "ware": "1.3.0"
   },
   "devDependencies": {
-    "docpress-core": "*",
+    "docpress-core": "git://github.com/docpress/docpress-core.git#master",
     "expect": "1.11.1",
     "istanbul": "0.3.21",
     "metalsmith": "2.1.0",
