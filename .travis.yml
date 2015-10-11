@@ -1,5 +1,5 @@
 language: node_js
 node_js:
-- "v4.1.1"
+- "4"
 script:
 - npm run coverage
