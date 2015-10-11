@@ -14,6 +14,8 @@ describe('to do', function () {
   })
 
   describe('to do', function () {
+    it('stylus instead of sass')
+    it('favicon support')
     it('external css options (docpress.json → css)')
     it('google analytics (docpress.json → googleAnalytics)')
     it('autoscroll the sidebar')
