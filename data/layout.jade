@@ -84,6 +84,7 @@ html
   head
     meta(charset='utf-8')
     link(rel='stylesheet' href=(base + 'assets/style.css?t=' + hash.style))
+    script(src=(base + 'assets/script.js?t=' + hash.script))
     title= title
   body.-menu-visible
     .doc-layout
@@ -95,4 +96,3 @@ html
         +footer-nav(prev, next)
       .menu.toc-menu
         +menu(toc, 0)
-    script(src=(base + 'assets/script.js?t=' + hash.script))
