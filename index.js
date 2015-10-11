@@ -91,8 +91,9 @@ function addJs (files, ms, done) {
  */
 
 function relayout (files, ms, done) {
-  const toc = JSON.parse(files['toc.json'].contents)
-  const index = JSON.parse(files['index.json'].contents)
+  const toc = files['_docpress.json'].toc
+  const index = files['_docpress.json'].index
+
   const path = fs.readFileSync(join(__dirname, 'data/layout.jade'), 'utf-8')
   const layout = jade.compile(path)
   const meta = ms.metadata()
