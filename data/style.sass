@@ -12,6 +12,7 @@ $accent: #4078C0
 $nav-width: 250px
 $collapsed-nav-width: 64px
 $xpad: 24px
+$line: rgba($black, 0.1)
 
 // :before:
 
@@ -49,7 +50,7 @@ html
     position: relative
     padding: ($pad - 4px) 0
     // background: #fdfefe
-    box-shadow: inset -1px 0 #f3f3f3
+    box-shadow: inset -1px 0 $line
     font-size: 13px
     transition: opacity 1500ms linear
 
@@ -389,9 +390,16 @@ ul.heading-list
     bottom: $xpad
     right: $xpad
     left: $xpad
-    height: 24px
+    height: 24px + 16px
     line-height: 24px
+    padding-top: 16px
+    border-top: solid 1px transparent
+    background-color: rgba(white, 0)
     +clearfix
+
+  &.-expanded
+    background-color: rgba(white, 1)
+    border-top-color: $line
 
   .left
     float: left
@@ -431,7 +439,6 @@ ul.heading-list
     color: rgba($slate, 0.5)
 
   .right .title
-    font-weight: bold
     margin-right: 0.1em
     color: $black
 
@@ -484,7 +491,7 @@ ul.heading-list
 
     .header-nav,
     .footer-nav
-      transition: left 250ms ease-in
+      transition: all 250ms ease-in
       left: $xpad + $collapsed-nav-width
 
     .-menu-visible &
