@@ -95,7 +95,7 @@ function relayout (files, ms, done) {
   const index = files['_docpress.json'].index
 
   const path = fs.readFileSync(join(__dirname, 'data/layout.jade'), 'utf-8')
-  const layout = jade.compile(path)
+  const layout = jade.compile(path, { pretty: true })
   const meta = ms.metadata()
 
   eachCons(index, (_, fname, __, prevName, ___, nextName) => {
