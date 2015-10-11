@@ -21,6 +21,8 @@ describe('to do', function () {
     it('assets/head.html')
     it('assets/body.html')
     it('search!')
+    it('link urls')
+    it('meta description')
   })
 })
 
