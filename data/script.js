@@ -85,7 +85,7 @@ void(function () {
     b.sc = Scrollclass(this, {
       className: '-expanded',
       onscroll: function (y) {
-        return this.maxScroll - y < 64
+        return this.maxScroll - y < 88
       }
     })
   }, function (b) {
