@@ -1,3 +1,8 @@
+## master
+
+- Make footer links bigger
+- Fix slight bug where documents with images can derail scrolltracking
+
 ## [v0.2.0]
 > Oct 12, 2015
 

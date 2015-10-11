@@ -39,6 +39,8 @@ function Scrollclass (el, options) {
 Scrollclass.prototype.listen = function () {
   window.addEventListener('resize', this._onresize)
   window.addEventListener('resize', this._onscroll)
+  document.addEventListener('load', this._onresize, true) // image events
+  document.addEventListener('load', this._onscroll, true)
   this.parent.addEventListener('scroll', this._onscroll)
   this._onresize()
   this._onscroll()
@@ -51,6 +53,8 @@ Scrollclass.prototype.listen = function () {
 Scrollclass.prototype.destroy = function () {
   window.removeEventListener('resize', this._onresize)
   window.removeEventListener('resize', this._onscroll)
+  document.removeEventListener('load', this._onresize, true)
+  document.removeEventListener('load', this._onscroll, true)
   this.parent.removeEventListener('scroll', this._onscroll)
 }
 

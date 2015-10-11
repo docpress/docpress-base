@@ -41,7 +41,10 @@ function Scrolltrack (options) {
 
 Scrolltrack.prototype.listen = function () {
   q(this.scrollParent).addEventListener('scroll', this.listener)
+  document.addEventListener('load', this.update, true) // image events
+  document.addEventListener('load', this.listener, true)
   window.addEventListener('resize', this.update)
+  window.addEventListener('resize', this.listener)
 }
 
 /**
@@ -50,7 +53,10 @@ Scrolltrack.prototype.listen = function () {
 
 Scrolltrack.prototype.destroy = function () {
   q(this.scrollParent).removeEventListener('scroll', this.listener)
+  document.removeEventListener('load', this.update, true)
+  document.removeEventListener('load', this.listener, true)
   window.removeEventListener('resize', this.update)
+  window.removeEventListener('resize', this.listener)
 }
 
 /**
