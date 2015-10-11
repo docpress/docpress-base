@@ -279,10 +279,10 @@ ul.heading-list
 .header-nav
   &
     position: fixed
-    top: $xpad
-    right: $xpad
-    left: $xpad
-    height: 40px
+    top: 0
+    right: 0
+    left: 0
+    height: 40px + $xpad + $xpad
     line-height: 40px
     text-align: center
 
@@ -317,6 +317,7 @@ ul.heading-list
     line-height: 1em
     color: rgba($slate, 0.75)
     transition: all 150ms linear
+    padding: $xpad
 
   .iconlink:hover
     color: $accent
@@ -337,9 +338,9 @@ ul.heading-list
     content: attr(data-title)
     display: inline-block
     position: absolute
-    bottom: -40px
-    right: 0
-    font-size: 12px
+    bottom: -24px - $xpad
+    right: $xpad
+    font-size: 13px
     padding: 3px 10px
     background: rgba($black, 0.8)
     color: white
@@ -418,13 +419,18 @@ ul.heading-list
 
   // Layout
   .left
-    float: left
-    width: 30%
+    position: absolute
+    left: 0
+    top: 0
 
   .right
-    float: right
-    width: 70%
+    position: absolute
+    right: 0
+    top: 0
     text-align: right
+
+  &.-expanded .right
+    width: 60%
 
   // Title and labels
   .title,
@@ -513,15 +519,10 @@ ul.heading-list
     .header-nav,
     .footer-nav
       transition: all 250ms ease-in
-      left: $xpad + $collapsed-nav-width
-
-    .footer-nav
       left: $collapsed-nav-width
 
     .-menu-visible &
-      .header-nav
-        left: $nav-width + $xpad
-
+      .header-nav,
       .footer-nav
         left: $nav-width
 
