@@ -13,10 +13,14 @@ describe('to do', function () {
     it('link to github', done)
     it('next/prev', done)
   })
+
   describe('to do', function () {
-    it('external css options')
-    it('google analytics')
+    it('external css options (docpress.css)')
+    it('google analytics (docpress.googleAnalytics)')
     it('site name as html class')
+    it('assets/head.html')
+    it('assets/body.html')
+    it('search!')
   })
 })
 
