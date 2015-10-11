@@ -387,26 +387,46 @@ ul.heading-list
 .footer-nav
   &
     position: fixed
-    bottom: $xpad
-    right: $xpad
-    left: $xpad
-    height: 24px + 16px
-    line-height: 24px
-    padding-top: 16px
+    bottom: 0
+    right: 0
+    left: 0
     border-top: solid 1px transparent
     background-color: rgba(white, 0)
     +clearfix
 
+  &, a
+    height: 24px + 16px + $xpad
+    line-height: 24px
+
+  a
+    display: block
+    white-space: nowrap
+    text-overflow: ellipsis
+
+  // Expanded: background
   &.-expanded
     background-color: rgba(white, 1)
-    border-top-color: $line
 
+    &:before
+      content: ''
+      position: absolute
+      left: $xpad
+      right: $xpad
+      top: 0
+      height: 1px
+      background: $line
+
+  // Layout
   .left
     float: left
+    width: 30%
 
   .right
     float: right
+    width: 70%
+    text-align: right
 
+  // Title and labels
   .title,
   .label
     opacity: 0
@@ -421,7 +441,6 @@ ul.heading-list
   .label,
   a:before,
   a:after
-    // transition: opacity 250ms linear, color 250ms linear, transform 250ms linear
     transition: all 250ms ease-in
 
   &.-expanded .title,
@@ -430,9 +449,11 @@ ul.heading-list
     transform: translate3d(0, 0, 0)
     pointer-events: auto
 
+  // Link styles
   a
     text-decoration: none
     color: $slate
+    padding: 16px $xpad $xpad $xpad
 
   .label,
   .left .title
@@ -494,10 +515,15 @@ ul.heading-list
       transition: all 250ms ease-in
       left: $xpad + $collapsed-nav-width
 
+    .footer-nav
+      left: $collapsed-nav-width
+
     .-menu-visible &
-      .header-nav,
-      .footer-nav
+      .header-nav
         left: $nav-width + $xpad
+
+      .footer-nav
+        left: $nav-width
 
       .body
         padding-left: $nav-width + $xpad
