@@ -14,14 +14,15 @@ describe('to do', function () {
   })
 
   describe('to do', function () {
+    it('responsive')
     it('stylus instead of sass')
-    it('favicon support')
+    it('favicon support (assets/favicon.png)')
     it('external css options (docpress.json → css)')
     it('google analytics (docpress.json → googleAnalytics)')
     it('autoscroll the sidebar')
     it('site name as html class')
+    it('docpress-base version as html class')
     it('assets/head.html')
-    it('assets/body.html')
     it('search!')
     it('meta description')
   })
