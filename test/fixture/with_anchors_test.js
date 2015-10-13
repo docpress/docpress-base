@@ -29,7 +29,7 @@ describe('fixture/with anchors:', function () {
     })
 
     it('links to anchored versions', function () {
-      expect(data).toInclude('<a href="index.html#two" class="link title  link-index">intro 2</a>')
+      expect(data).toInclude('<a href="index.html#two" class="link title  link-index-2">intro 2</a>')
     })
   })
 })
