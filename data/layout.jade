@@ -83,11 +83,10 @@ doctype html
 html
   head
     meta(charset='utf-8')
-    link(rel='stylesheet' href=(base + 'assets/style.css?t=' + hash.style))
-    if externalCss
-      - for (var i in externalCss)
-        link(rel='stylesheet' href=externalCss[i])
-    script(src=(base + 'assets/script.js?t=' + hash.script))
+    - for (var i in styles)
+      link(rel='stylesheet' href=styles[i])
+    - for (var i in scripts)
+      script(src=scripts[i])
     title= title
   body.-menu-visible
     .doc-layout

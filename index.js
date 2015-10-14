@@ -81,8 +81,8 @@ function addJs (files, ms, done) {
  * * `next.title` — next page title.
  * * `next.url` — next page url.
  * * `active` — the filename of the active file (eg, `foo/index.html`)
- * * `hash.style` — hash for style.css
- * * `hash.script` — hash for script.js
+ * * `styles` — array of CSS files
+ * * `scripts` — array of JavaScript files
  *
  * `meta` typically has:
  *
@@ -98,22 +98,24 @@ function relayout (files, ms, done) {
   const layout = jade.compile(path, { pretty: true })
   const meta = ms.metadata()
   const externalCss = getCss(meta)
+  const hashes = {
+    style: hash(files['assets/style.css'].contents),
+    script: hash(files['assets/script.js'].contents)
+  }
 
   eachCons(index, (_, fname, __, prevName, ___, nextName) => {
     if (!fname.match(/\.html$/)) return
     const file = files[fname]
     const base = Array(fname.split('/').length).join('../')
+    const styles = [ `${base}assets/style.css?t=${hashes.style}` ]
+      .concat(externalCss)
+    const scripts = [ `${base}assets/script.js?t=${hashes.script}` ]
 
     file.contents = layout(assign({}, file, {
-      base, toc, index, meta,
+      base, toc, index, meta, styles, scripts,
       prev: prevName && assign({}, index[prevName], { url: base + prevName }),
       next: nextName && assign({}, index[nextName], { url: base + nextName }),
-      externalCss,
-      active: fname,
-      hash: {
-        style: hash(files['assets/style.css'].contents),
-        script: hash(files['assets/script.js'].contents)
-      }
+      active: fname
     }))
   })
 
