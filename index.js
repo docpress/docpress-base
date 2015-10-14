@@ -97,6 +97,7 @@ function relayout (files, ms, done) {
   const path = fs.readFileSync(join(__dirname, 'data/layout.jade'), 'utf-8')
   const layout = jade.compile(path, { pretty: true })
   const meta = ms.metadata()
+  const externalCss = getCss(meta)
 
   eachCons(index, (_, fname, __, prevName, ___, nextName) => {
     if (!fname.match(/\.html$/)) return
@@ -107,6 +108,7 @@ function relayout (files, ms, done) {
       base, toc, index, meta,
       prev: prevName && assign({}, index[prevName], { url: base + prevName }),
       next: nextName && assign({}, index[nextName], { url: base + nextName }),
+      externalCss,
       active: fname,
       hash: {
         style: hash(files['assets/style.css'].contents),
@@ -116,6 +118,16 @@ function relayout (files, ms, done) {
   })
 
   done()
+}
+
+function getCss (meta) {
+  let css = meta.css
+  if (!css) return
+
+  if (typeof css === 'string') css = [css]
+  return css.map((c) => {
+    return c // TODO: add hashes if it's local
+  })
 }
 
 function eachCons (list, fn) {
