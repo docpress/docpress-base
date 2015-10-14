@@ -44,7 +44,7 @@
     "url": "git+https://github.com/docpress/docpress-base.git"
   },
   "scripts": {
-    "coverage": "istanbul cover _mocha -x **/fixture/** -- -R spec",
+    "coverage": "istanbul cover _mocha -x '**/fixture/**' -- -R spec",
     "test": "mocha",
     "serve": "ss fixture/onmount/_docpress",
     "watch": "mocha -R min --watch"
