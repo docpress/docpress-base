@@ -1,3 +1,8 @@
+## [v0.5.5]
+> Oct 16, 2015
+
+- Fix styles overlapping in development mode.
+
 ## [v0.5.4]
 > Oct 16, 2015
 
@@ -44,3 +49,4 @@
 [v0.5.0]: https://github.com/docpress/docpress-base/compare/v0.4.0...v0.5.0
 [v0.5.3]: https://github.com/docpress/docpress-base/compare/v0.5.0...v0.5.3
 [v0.5.4]: https://github.com/docpress/docpress-base/compare/v0.5.3...v0.5.4
+[v0.5.5]: https://github.com/docpress/docpress-base/compare/v0.5.4...v0.5.5
