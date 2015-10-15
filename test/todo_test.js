@@ -13,9 +13,13 @@ describe('to do', function () {
     it('next/prev', done)
   })
 
+  describe('css', function () {
+    it('stylus instead of sass')
+    it('revisit the way CSS is loaded (custom.scss sucks)')
+  })
+
   describe('to do', function () {
     it('responsive')
-    it('stylus instead of sass')
     it('favicon support (assets/favicon.png)')
     it('external css options (docpress.json → css)')
     it('google analytics (docpress.json → googleAnalytics)')
