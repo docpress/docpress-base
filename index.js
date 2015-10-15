@@ -10,6 +10,7 @@ const buildJs = require('./lib/build_js')
 const buildCss = require('./lib/build_css')
 const hash = require('./lib/hash')
 const eachCons = require('./lib/helpers/each_cons')
+const toArray = require('./lib/helpers/to_array')
 
 /**
  * Metalsmith middleware
@@ -18,13 +19,14 @@ const eachCons = require('./lib/helpers/each_cons')
 module.exports = function base (options) {
   const ctx = {
     styles: [],
-    scripts: []
+    scripts: [],
+    stylusImports: []
   }
 
   var app = ware()
+    .use(sortCss.bind(ctx))
     .use(addJs.bind(ctx))
     .use(addCss.bind(ctx))
-    .use(addExternalCss.bind(ctx))
     .use(relayout.bind(ctx))
 
   return function (files, ms, done) {
@@ -32,18 +34,36 @@ module.exports = function base (options) {
   }
 }
 
+/*
+ * Sorts out CSS into `styles` (local/external styles) and `stylusImports`
+ */
+
+function sortCss (files, ms, done) {
+  const list = toArray(ms.metadata().css)
+  const sources = files['_docpress.json'].sources
+
+  list.forEach((item) => {
+    if (item.match(/\.styl$/)) this.stylusImports.push(item)
+    else if (item.match(/^https?:\/\//)) this.styles.push(item)
+    else {
+      const local = sources[item]
+      if (!local) throw new Error(`css: can't find '#{item}'`)
+      this.styles.push(local)
+    }
+  })
+
+  done()
+}
+
 /**
  * Assets
  */
 
 function addCss (files, ms, done) {
-  if (files['assets/style.css']) return done()
-
-  // TODO: stylus import
-  buildCss({}, (err, contents) => {
+  buildCss({ imports: this.stylusImports }, (err, contents) => {
     if (err) return done(err)
     files['assets/style.css'] = { contents }
-    this.styles.push('assets/style.css?t=' + hash(contents))
+    this.styles.unshift('assets/style.css?t=' + hash(contents))
     done()
   })
 }
@@ -65,18 +85,6 @@ function addJs (files, ms, done) {
       hash(files['assets/script.js'].contents))
     done()
   })
-}
-
-/**
- * Add external CSS
- */
-
-function addExternalCss (files, ms, done) {
-  const meta = ms.metadata()
-  const externalCss = getCss(meta)
-  // TODO: account for local styles
-  this.styles = this.styles.concat(externalCss)
-  done()
 }
 
 /**
@@ -135,12 +143,4 @@ function relativize (base) {
 
     return base + url
   }
-}
-
-function getCss (meta) {
-  let css = meta.css
-  if (!css) return []
-
-  if (typeof css === 'string') css = [css]
-  return css // TODO: add hashes if it's local
 }
