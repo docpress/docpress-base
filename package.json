@@ -1,7 +1,7 @@
 {
   "name": "docpress-base",
   "description": "Base theme for Docpress.",
-  "version": "0.5.0",
+  "version": "0.5.3",
   "author": "Rico Sta. Cruz <rico@ricostacruz.com>",
   "bugs": {
     "url": "https://github.com/docpress/docpress-base/issues"

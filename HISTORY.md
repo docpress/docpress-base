@@ -1,3 +1,9 @@
+## [v0.5.3]
+> Oct 16, 2015
+
+- Add `viewport` meta tag for responsiveness
+- Fix Pjax suddenly not working
+
 ## [v0.5.0]
 > Oct 16, 2015
 
@@ -31,3 +37,4 @@
 [v0.3.1]: https://github.com/docpress/docpress-base/compare/v0.2.0...v0.3.1
 [v0.4.0]: https://github.com/docpress/docpress-base/compare/v0.3.1...v0.4.0
 [v0.5.0]: https://github.com/docpress/docpress-base/compare/v0.4.0...v0.5.0
+[v0.5.3]: https://github.com/docpress/docpress-base/compare/v0.5.0...v0.5.3
