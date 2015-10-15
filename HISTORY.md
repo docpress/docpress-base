@@ -1,6 +1,8 @@
-## master
+## [v0.5.0]
+> Oct 16, 2015
 
 - Use Stylus instead of Sass
+- Use new setting `css` for custom CSS
 - Fix bug where a stray `<link rel="stylesheet">` appears in the source
 
 ## [v0.4.0]
@@ -28,3 +30,4 @@
 [v0.2.0]: https://github.com/docpress/docpress-base/compare/v0.1.0...v0.2.0
 [v0.3.1]: https://github.com/docpress/docpress-base/compare/v0.2.0...v0.3.1
 [v0.4.0]: https://github.com/docpress/docpress-base/compare/v0.3.1...v0.4.0
+[v0.5.0]: https://github.com/docpress/docpress-base/compare/v0.4.0...v0.5.0
