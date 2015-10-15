@@ -13,11 +13,14 @@ var Scrollclass = require('./scrollclass')
  */
 
 void (function () {
-  new Pjax({
-    selectors: ['.body', '.toc-menu', 'title']
+  ready(function () {
+    new Pjax({
+      selectors: ['.body', '.toc-menu', 'title']
+    })
   })
 
   document.addEventListener('pjax:send', function () {
+  console.log("PJAX:START BITCHES")
     Nprogress.start()
   })
 
@@ -26,6 +29,7 @@ void (function () {
   })
 
   document.addEventListener('pjax:complete', function () {
+  console.log("PJAX:DONE BITCHES")
     Nprogress.done()
   })
 }())
