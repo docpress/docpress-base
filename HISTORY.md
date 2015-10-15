@@ -1,3 +1,8 @@
+## master
+
+- Use Stylus instead of Sass
+- Fix bug where a stray `<link rel="stylesheet">` appears in the source
+
 ## [v0.4.0]
 > Oct 15, 2015
 

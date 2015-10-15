@@ -9,20 +9,53 @@ const assign = Object.assign
 const buildJs = require('./lib/build_js')
 const buildCss = require('./lib/build_css')
 const hash = require('./lib/hash')
+const eachCons = require('./lib/helpers/each_cons')
+const toArray = require('./lib/helpers/to_array')
 
 /**
  * Metalsmith middleware
  */
 
 module.exports = function base (options) {
+  const ctx = {
+    styles: [],
+    scripts: [],
+    stylusImports: []
+  }
+
   var app = ware()
-    .use(addJs)
-    .use(addCss)
-    .use(relayout)
+    .use(sortCss.bind(ctx))
+    .use(addJs.bind(ctx))
+    .use(addCss.bind(ctx))
+    .use(relayout.bind(ctx))
 
   return function (files, ms, done) {
     app.run(files, ms, done)
   }
+}
+
+/*
+ * Sorts out CSS into `styles` (local/external styles) and `stylusImports`
+ */
+
+function sortCss (files, ms, done) {
+  const list = toArray(ms.metadata().css)
+  const sources = files['_docpress.json'].sources
+
+  list.forEach((item) => {
+    if (item.match(/\.styl$/)) {
+      const path = join(ms.source(), item)
+      this.stylusImports.push(path)
+    } else if (item.match(/^https?:\/\//)) {
+      this.styles.push(item)
+    } else {
+      const local = sources[item]
+      if (!local) throw new Error(`css: can't find '#{item}'`)
+      this.styles.push(local)
+    }
+  })
+
+  done()
 }
 
 /**
@@ -30,30 +63,17 @@ module.exports = function base (options) {
  */
 
 function addCss (files, ms, done) {
-  if (files['assets/style.css']) return done()
-
-  function getAssetFile (file) {
-    return files[file] &&
-      ms.path(ms.source(), ms.metadata().docs, file)
-  }
-
-  buildCss({
-    before:
-      getAssetFile('assets/variables.scss') ||
-      getAssetFile('assets/variables.sass'),
-    after:
-      getAssetFile('assets/custom.scss') ||
-      getAssetFile('assets/custom.sass')
-  }, (err, contents) => {
+  buildCss({ imports: this.stylusImports }, (err, contents) => {
     if (err) return done(err)
-    delete files['assets/variables.scss']
-    delete files['assets/variables.sass']
-    delete files['assets/custom.scss']
-    delete files['assets/custom.sass']
     files['assets/style.css'] = { contents }
+    this.styles.unshift('assets/style.css?t=' + hash(contents))
     done()
   })
 }
+
+/**
+ * Add JavaScript
+ */
 
 function addJs (files, ms, done) {
   buildJs((err, contents) => {
@@ -64,6 +84,8 @@ function addJs (files, ms, done) {
       files['assets/script.js'].contents = contents + '\n' +
         files['assets/script.js'].contents
     }
+    this.scripts.push('assets/script.js?t=' +
+      hash(files['assets/script.js'].contents))
     done()
   })
 }
@@ -97,19 +119,13 @@ function relayout (files, ms, done) {
   const path = fs.readFileSync(join(__dirname, 'data/layout.jade'), 'utf-8')
   const layout = jade.compile(path, { pretty: true })
   const meta = ms.metadata()
-  const externalCss = getCss(meta)
-  const hashes = {
-    style: hash(files['assets/style.css'].contents),
-    script: hash(files['assets/script.js'].contents)
-  }
 
   eachCons(index, (_, fname, __, prevName, ___, nextName) => {
     if (!fname.match(/\.html$/)) return
     const file = files[fname]
     const base = Array(fname.split('/').length).join('../')
-    const styles = [ `${base}assets/style.css?t=${hashes.style}` ]
-      .concat(externalCss)
-    const scripts = [ `${base}assets/script.js?t=${hashes.script}` ]
+    const styles = this.styles.map(relativize(base))
+    const scripts = this.scripts.map(relativize(base))
 
     file.contents = layout(assign({}, file, {
       base, toc, index, meta, styles, scripts,
@@ -122,23 +138,12 @@ function relayout (files, ms, done) {
   done()
 }
 
-function getCss (meta) {
-  let css = meta.css
-  if (!css) return
+function relativize (base) {
+  return function (url) {
+    if (url.substr(0, 1) === '/' || url.match(/^https?:\/\//)) {
+      return url
+    }
 
-  if (typeof css === 'string') css = [css]
-  return css.map((c) => {
-    return c // TODO: add hashes if it's local
-  })
-}
-
-function eachCons (list, fn) {
-  var keys = Object.keys(list)
-  keys.forEach((key, idx) => {
-    const prevKey = keys[idx - 1]
-    const nextKey = keys[idx + 1]
-    fn(list[key], key,
-       prevKey && list[prevKey], prevKey,
-       nextKey && list[nextKey], nextKey)
-  })
+    return base + url
+  }
 }

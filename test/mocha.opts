@@ -1,3 +1,5 @@
 --recursive
+--require mocha-clean/brief
 --require test/setup
 --watch-extensions=sass,jade,md,css
+--timeout 10000

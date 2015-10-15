@@ -1,20 +1,12 @@
 'use strict'
 
 const fixture = require('../support/fixture')
+const buildMs = require('../support/build_ms')
 
-describe('fixture', function () {
-  this.timeout(10000)
-
-  let app, data
+describe('fixture/onmount:', function () {
   let fx = fixture('onmount')
-
-  before(function (done) {
-    app = require(fx.path('metalsmith.js'))
-    app.build((err) => {
-      if (err) return done(err)
-      done()
-    })
-  })
+  buildMs(fx.path('metalsmith.js'))
+  let data
 
   describe('index.html', function () {
     before(function () {
@@ -26,6 +18,11 @@ describe('fixture', function () {
       expect(data).toInclude('markdown-body')
       expect(data).toInclude('toc-menu')
       expect(data).toInclude('body page-index') // slug
+    })
+
+    it('doesn\'t output extra css', function () {
+      // old bug
+      expect(data).toExclude('<link rel="stylesheet">')
     })
 
     it('highlights current menu item', function () {
@@ -50,10 +47,7 @@ describe('fixture', function () {
     it('works', function () {
       expect(data).toInclude('.markdown-body')
       expect(data).toInclude('.toc-menu')
-    })
-
-    it('renders custom css', function () {
-      expect(data).toInclude('fira sans')
+      expect(data).toInclude('octicons-anchor')
     })
   })
 

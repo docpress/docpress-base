@@ -1,22 +1,22 @@
-@import './normalize.css/normalize'
-@import './github-markdown-css/github-markdown'
-@import './nprogress/nprogress'
-@import './iconfonts/stylesheets/ionicons'
+@require './normalize.css/normalize.css'
+@require './github-markdown-css/github-markdown.css'
+@require './nprogress/nprogress.css'
+@require './iconfonts/stylesheets/ionicons'
 
-@include ion-font
+ion-font()
 
-$bg: white
-$black: #111
-$slate: #505d6b
-$accent: #4078C0
-$nav-width: 250px
-$collapsed-nav-width: 64px
-$xpad: 24px
-$line: rgba($black, 0.1)
+$bg ?= white
+$black ?= #111
+$slate ?= #505d6b
+$accent ?= #4078C0
+$nav-width ?= 250px
+$collapsed-nav-width ?= 64px
+$xpad ?= 24px
+$line ?= rgba($black, 0.1)
 
 // :before:
 
-@mixin clearfix
+clearfix()
   &:after
     content: ''
     display: table
@@ -44,7 +44,7 @@ html
 //
 
 .toc-menu
-  $pad: 24px
+  $pad = 24px
 
   &
     position: relative
@@ -129,7 +129,7 @@ html
 //
 
 ul.heading-list
-  $pad: 24px
+  $pad = 24px
 
   .hlink
     text-decoration: none
@@ -239,7 +239,7 @@ ul.heading-list
 
   &:before
     display: inline-block
-    @include ion-icon('navicon', 24px)
+    ion-icon('navicon', 24px)
     text-align: center
     width: $size
 
@@ -253,7 +253,7 @@ ul.heading-list
 
 .toc-menu
   &:before
-    +ion-icon('ios-search-strong', 20px)
+    ion-icon('ios-search-strong', 20px)
     display: block
     width: 40px
     height: 40px
@@ -377,7 +377,7 @@ ul.heading-list
 
   // Icons
   .icon.-github:after
-    +ion-icon('social-github')
+    ion-icon('social-github')
 
 //
 // Footer nav
@@ -391,7 +391,7 @@ ul.heading-list
     left: 0
     border-top: solid 1px transparent
     background-color: rgba(white, 0)
-    +clearfix
+    clearfix()
 
   &, a
     height: 24px + 16px + $xpad
@@ -483,11 +483,11 @@ ul.heading-list
     top: -1px
 
   .left a:before
-    +ion-icon('chevron-left')
+    ion-icon('chevron-left')
     margin-right: 16px
 
   .right a:after
-    +ion-icon('chevron-right')
+    ion-icon('chevron-right')
     margin-left: 16px
 
 //
