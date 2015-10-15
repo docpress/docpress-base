@@ -2,7 +2,7 @@
 
 const fixture = require('../support/fixture')
 
-describe('fixture', function () {
+describe('fixture/onmount:', function () {
   this.timeout(10000)
 
   let app, data
