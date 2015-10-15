@@ -43,9 +43,12 @@ function sortCss (files, ms, done) {
   const sources = files['_docpress.json'].sources
 
   list.forEach((item) => {
-    if (item.match(/\.styl$/)) this.stylusImports.push(item)
-    else if (item.match(/^https?:\/\//)) this.styles.push(item)
-    else {
+    if (item.match(/\.styl$/)) {
+      const path = join(ms.source(), item)
+      this.stylusImports.push(path)
+    } else if (item.match(/^https?:\/\//)) {
+      this.styles.push(item)
+    } else {
       const local = sources[item]
       if (!local) throw new Error(`css: can't find '#{item}'`)
       this.styles.push(local)
