@@ -124,7 +124,7 @@ function relayout (files, ms, done) {
 
 function getCss (meta) {
   let css = meta.css
-  if (!css) return
+  if (!css) return []
 
   if (typeof css === 'string') css = [css]
   return css.map((c) => {

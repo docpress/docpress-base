@@ -28,6 +28,11 @@ describe('fixture/onmount:', function () {
       expect(data).toInclude('body page-index') // slug
     })
 
+    it('doesn\'t output extra css', function () {
+      // old bug
+      expect(data).toExclude('<link rel="stylesheet">')
+    })
+
     it('highlights current menu item', function () {
       expect(data).toMatch(/-active[^>]+>onmount/)
     })
