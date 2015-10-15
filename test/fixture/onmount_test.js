@@ -51,10 +51,6 @@ describe('fixture', function () {
       expect(data).toInclude('.markdown-body')
       expect(data).toInclude('.toc-menu')
     })
-
-    it('renders custom css', function () {
-      expect(data).toInclude('fira sans')
-    })
   })
 
   describe('script.js', function () {
