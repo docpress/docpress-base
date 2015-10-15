@@ -20,7 +20,6 @@ void (function () {
   })
 
   document.addEventListener('pjax:send', function () {
-  console.log("PJAX:START BITCHES")
     Nprogress.start()
   })
 
@@ -29,7 +28,6 @@ void (function () {
   })
 
   document.addEventListener('pjax:complete', function () {
-  console.log("PJAX:DONE BITCHES")
     Nprogress.done()
   })
 }())
