@@ -14,19 +14,19 @@ describe('to do', function () {
   })
 
   describe('css', function () {
-    it('stylus instead of sass')
-    it('revisit the way CSS is loaded (custom.scss sucks)')
+    it('stylus instead of sass', done)
+    it('revisit the way CSS is loaded (custom.scss sucks)', done)
+    it('external css options (docpress.json → css)', done)
   })
 
   describe('to do', function () {
     it('responsive')
     it('favicon support (assets/favicon.png)')
-    it('external css options (docpress.json → css)')
     it('google analytics (docpress.json → googleAnalytics)')
+    it('custom head (docpress.json → head)')
     it('autoscroll the sidebar')
     it('site name as html class')
     it('docpress-base version as html class')
-    it('assets/head.html')
     it('search!')
     it('meta description')
   })
