@@ -17,13 +17,10 @@ const toArray = require('./lib/helpers/to_array')
  */
 
 module.exports = function base (options) {
-  const ctx = {
-    styles: [],
-    scripts: [],
-    stylusImports: []
-  }
+  const ctx = {}
 
   var app = ware()
+    .use(reset.bind(ctx))
     .use(sortCss.bind(ctx))
     .use(addJs.bind(ctx))
     .use(addCss.bind(ctx))
@@ -32,6 +29,13 @@ module.exports = function base (options) {
   return function (files, ms, done) {
     app.run(files, ms, done)
   }
+}
+
+function reset (files, ms, done) {
+  this.styles = []
+  this.scripts = []
+  this.stylusImports = []
+  done()
 }
 
 /*
