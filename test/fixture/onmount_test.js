@@ -1,20 +1,12 @@
 'use strict'
 
 const fixture = require('../support/fixture')
+const buildMs = require('../support/build_ms')
 
 describe('fixture/onmount:', function () {
-  this.timeout(10000)
-
-  let app, data
   let fx = fixture('onmount')
-
-  before(function (done) {
-    app = require(fx.path('metalsmith.js'))
-    app.build((err) => {
-      if (err) return done(err)
-      done()
-    })
-  })
+  buildMs(fx.path('metalsmith.js'))
+  let data
 
   describe('index.html', function () {
     before(function () {
