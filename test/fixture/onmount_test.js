@@ -47,6 +47,7 @@ describe('fixture/onmount:', function () {
     it('works', function () {
       expect(data).toInclude('.markdown-body')
       expect(data).toInclude('.toc-menu')
+      expect(data).toInclude('octicons-anchor')
     })
   })
 
