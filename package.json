@@ -46,6 +46,8 @@
   },
   "scripts": {
     "coverage": "istanbul cover _mocha -x '**/fixture/**' -- -R spec",
+    "build": "mkdir -p cache && ./bin/build --css > cache/style.css && ./bin/build --js > cache/script.js",
+    "prepublish": "npm run build",
     "test": "mocha",
     "serve": "ss fixture/onmount/_docpress",
     "watch": "mocha -R min --watch"

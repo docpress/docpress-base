@@ -80,7 +80,7 @@ function addCss (files, ms, done) {
  */
 
 function addJs (files, ms, done) {
-  buildJs((err, contents) => {
+  buildJs({}, (err, contents) => {
     if (err) return done(err)
     if (!files['assets/script.js']) {
       files['assets/script.js'] = { contents }

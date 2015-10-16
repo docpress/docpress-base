@@ -1,3 +1,4 @@
 node_modules/
 _docpress
+/cache
 /coverage
