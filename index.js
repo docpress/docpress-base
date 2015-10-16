@@ -67,12 +67,27 @@ function sortCss (files, ms, done) {
  */
 
 function addCss (files, ms, done) {
-  buildCss({ imports: this.stylusImports }, (err, contents) => {
+  const callback = (err, contents) => {
     if (err) return done(err)
     files['assets/style.css'] = { contents }
     this.styles.unshift('assets/style.css?t=' + hash(contents))
     done()
-  })
+  }
+
+  const cacheable = (this.stylusImports.length === 0)
+
+  ;(cacheable && useCache('cache/style.css', callback)) ||
+    buildCss({ imports: this.stylusImports }, callback)
+}
+
+// TODO: async
+// TODO: production version
+// TODO: move browserify/uglify as devDependency
+function useCache (fname, callback) {
+  try {
+    callback(null, require('fs').readFileSync(join(__dirname, fname), 'utf-8'))
+    return true
+  } catch (e) {}
 }
 
 /**
@@ -80,18 +95,16 @@ function addCss (files, ms, done) {
  */
 
 function addJs (files, ms, done) {
-  buildJs({}, (err, contents) => {
+  const callback = (err, contents) => {
     if (err) return done(err)
-    if (!files['assets/script.js']) {
-      files['assets/script.js'] = { contents }
-    } else {
-      files['assets/script.js'].contents = contents + '\n' +
-        files['assets/script.js'].contents
-    }
+    files['assets/script.js'] = { contents }
     this.scripts.push('assets/script.js?t=' +
       hash(files['assets/script.js'].contents))
     done()
-  })
+  }
+
+  useCache('cache/script.js', callback) ||
+    buildJs({}, callback)
 }
 
 /**
