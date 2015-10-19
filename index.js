@@ -12,6 +12,7 @@ const hash = require('./lib/hash')
 const eachCons = require('./lib/helpers/each_cons')
 const toArray = require('./lib/helpers/to_array')
 const memoize = require('./lib/memoize')
+const useCache = require('./lib/helpers/use_cache')
 
 /**
  * Metalsmith middleware
@@ -79,13 +80,6 @@ function addCss (files, ms, done) {
 
   ;(cacheable && useCache('cache/style.css', callback)) ||
     buildCss({ imports: this.stylusImports }, callback)
-}
-
-function useCache (fname, callback) {
-  try {
-    callback(null, require('fs').readFileSync(join(__dirname, fname), 'utf-8'))
-    return true
-  } catch (e) {}
 }
 
 /**
