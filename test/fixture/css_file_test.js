@@ -13,7 +13,7 @@ describe('fixture/css-file:', function () {
     })
 
     it('changes accent color', function () {
-      expect(this.data).toInclude('href="extra.css"')
+      expect(this.data).toMatch(/href="extra.css\?t=[a-f0-9]{8}"/)
     })
   })
 })

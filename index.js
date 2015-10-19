@@ -56,11 +56,12 @@ function sortCss (files, ms, done) {
     } else if (item.match(/^https?:\/\//)) {
       this.styles.push(item)
     } else if (sources[item]) {
-      this.styles.push(sources[item])
+      const local = sources[item]
+      this.styles.push(local + '?t=' + hash(files[local].contents))
     } else if (files[item]) {
-      this.styles.push(item)
+      this.styles.push(item + '?t=' + hash(files[item].contents))
     } else {
-      throw new Error(`css: can't find '#{item}'`)
+      throw new Error(`css: can't find '${item}'`)
     }
   })
 
@@ -75,11 +76,13 @@ function sortJs (files, ms, done) {
     if (item.match(/^https?:\/\//)) {
       this.scripts.push(item)
     } else if (sources[item]) {
-      this.scripts.push(sources[item])
+      const local = sources[item]
+      this.scripts.push(local + '?t=' + hash(files[local].contents))
     } else if (files[item]) {
-      this.scripts.push(item)
+      this.scripts.push(item + '?t=' + hash(files[item].contents))
     } else {
-      throw new Error(`js: can't find '#{item}'`)
+      console.log(Object.keys(files))
+      throw new Error(`js: can't find '${item}'`)
     }
   })
   done()
