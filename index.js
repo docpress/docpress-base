@@ -47,21 +47,14 @@ function reset (files, ms, done) {
 
 function sortCss (files, ms, done) {
   const list = toArray(ms.metadata().css)
-  const sources = files['_docpress.json'].sources
+  const add = addAsset.bind(this, this.styles, 'css', files)
 
   list.forEach((item) => {
     if (item.match(/\.styl$/)) {
       const path = join(ms.source(), item)
       this.stylusImports.push(path)
-    } else if (item.match(/^https?:\/\//)) {
-      this.styles.push(item)
-    } else if (sources[item]) {
-      const local = sources[item]
-      this.styles.push(local + '?t=' + hash(files[local].contents))
-    } else if (files[item]) {
-      this.styles.push(item + '?t=' + hash(files[item].contents))
     } else {
-      throw new Error(`css: can't find '${item}'`)
+      add(item)
     }
   })
 
@@ -70,22 +63,30 @@ function sortCss (files, ms, done) {
 
 function sortJs (files, ms, done) {
   const list = toArray(ms.metadata().js)
+  const add = addAsset.bind(this, this.scripts, 'js', files)
+
+  list.forEach((item) => { add(item) })
+  done()
+}
+
+/**
+ * Internal: delegate of sortJs and sortCss.
+ * Adds a file into `this.styles` or `this.scripts`.
+ */
+
+function addAsset (list, what, files, item) {
   const sources = files['_docpress.json'].sources
 
-  list.forEach((item) => {
-    if (item.match(/^https?:\/\//)) {
-      this.scripts.push(item)
-    } else if (sources[item]) {
-      const local = sources[item]
-      this.scripts.push(local + '?t=' + hash(files[local].contents))
-    } else if (files[item]) {
-      this.scripts.push(item + '?t=' + hash(files[item].contents))
-    } else {
-      console.log(Object.keys(files))
-      throw new Error(`js: can't find '${item}'`)
-    }
-  })
-  done()
+  if (item.match(/^https?:\/\//)) {
+    list.push(item)
+  } else if (sources[item]) {
+    const local = sources[item]
+    list.push(local + '?t=' + hash(files[local].contents))
+  } else if (files[item]) {
+    list.push(item + '?t=' + hash(files[item].contents))
+  } else {
+    throw new Error(`${what}: can't find '${item}'`)
+  }
 }
 
 /**
