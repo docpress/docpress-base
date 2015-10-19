@@ -24,6 +24,7 @@ module.exports = function base (options) {
   var app = ware()
     .use(reset.bind(ctx))
     .use(sortCss.bind(ctx))
+    .use(sortJs.bind(ctx))
     .use(addJs.bind(ctx))
     .use(addCss.bind(ctx))
     .use(relayout.bind(ctx))
@@ -54,13 +55,33 @@ function sortCss (files, ms, done) {
       this.stylusImports.push(path)
     } else if (item.match(/^https?:\/\//)) {
       this.styles.push(item)
+    } else if (sources[item]) {
+      this.styles.push(sources[item])
+    } else if (files[item]) {
+      this.styles.push(item)
     } else {
-      const local = sources[item]
-      if (!local) throw new Error(`css: can't find '#{item}'`)
-      this.styles.push(local)
+      throw new Error(`css: can't find '#{item}'`)
     }
   })
 
+  done()
+}
+
+function sortJs (files, ms, done) {
+  const list = toArray(ms.metadata().js)
+  const sources = files['_docpress.json'].sources
+
+  list.forEach((item) => {
+    if (item.match(/^https?:\/\//)) {
+      this.scripts.push(item)
+    } else if (sources[item]) {
+      this.scripts.push(sources[item])
+    } else if (files[item]) {
+      this.scripts.push(item)
+    } else {
+      throw new Error(`js: can't find '#{item}'`)
+    }
+  })
   done()
 }
 
