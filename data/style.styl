@@ -207,10 +207,11 @@ ul.heading-list
 //
 
 .menu-toggle
-  $size: 40px
+  $size = 40px
 
   &
     display: none
+    box-sizing: content-box
 
   @media (min-width: 769px)
     display: block
@@ -223,10 +224,9 @@ ul.heading-list
     left: 0
     bottom: 0
     color: $black
-    border-radius: 3px
     z-index: 10
     cursor: pointer
-    background-color: transparent
+    background: transparent
 
   &
     // keep the white visible
