@@ -11,6 +11,7 @@ const buildCss = require('./lib/build_css')
 const hash = require('./lib/hash')
 const eachCons = require('./lib/helpers/each_cons')
 const toArray = require('./lib/helpers/to_array')
+const memoize = require('./lib/memoize')
 
 /**
  * Metalsmith middleware
@@ -129,10 +130,12 @@ function addJs (files, ms, done) {
 function relayout (files, ms, done) {
   const toc = files['_docpress.json'].toc
   const index = files['_docpress.json'].index
-
-  const path = fs.readFileSync(join(__dirname, 'data/layout.jade'), 'utf-8')
-  const layout = jade.compile(path, { pretty: true })
   const meta = ms.metadata()
+
+  const jadeData = fs.readFileSync(join(__dirname, 'data/layout.jade'), 'utf-8')
+  const layout = memoize(['jade', jadeData], () => {
+    return jade.compile(jadeData, { pretty: true })
+  })
 
   eachCons(index, (_, fname, __, prevName, ___, nextName) => {
     if (!fname.match(/\.html$/)) return
@@ -141,12 +144,18 @@ function relayout (files, ms, done) {
     const styles = this.styles.map(relativize(base))
     const scripts = this.scripts.map(relativize(base))
 
-    file.contents = layout(assign({}, file, {
+    const locals = {
       base, toc, index, meta, styles, scripts,
       prev: prevName && assign({}, index[prevName], { url: base + prevName }),
       next: nextName && assign({}, index[nextName], { url: base + nextName }),
       active: fname
-    }))
+    }
+
+    const key = [ jadeData, locals, file ]
+
+    file.contents = memoize(['jadedata', key], () => {
+      return layout(assign({}, file, locals))
+    })
   })
 
   done()
