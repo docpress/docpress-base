@@ -80,9 +80,6 @@ function addCss (files, ms, done) {
     buildCss({ imports: this.stylusImports }, callback)
 }
 
-// TODO: async
-// TODO: production version
-// TODO: move browserify/uglify as devDependency
 function useCache (fname, callback) {
   try {
     callback(null, require('fs').readFileSync(join(__dirname, fname), 'utf-8'))
