@@ -1,7 +1,14 @@
+## [v0.6.0]
+> Oct 20, 2015
+
+- Cache reusable values - makes much compilation faster
+- Allow external JS loading via the `js` option
+- Fix menu toggle not appearing properly
+
 ## [v0.5.5]
 > Oct 16, 2015
 
-- Fix styles overlapping in development mode.
+- Fix styles overlapping in development mode
 
 ## [v0.5.4]
 > Oct 16, 2015
@@ -50,3 +57,4 @@
 [v0.5.3]: https://github.com/docpress/docpress-base/compare/v0.5.0...v0.5.3
 [v0.5.4]: https://github.com/docpress/docpress-base/compare/v0.5.3...v0.5.4
 [v0.5.5]: https://github.com/docpress/docpress-base/compare/v0.5.4...v0.5.5
+[v0.6.0]: https://github.com/docpress/docpress-base/compare/v0.5.5...v0.6.0
