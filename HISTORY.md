@@ -1,3 +1,8 @@
+## [v0.6.1]
+> Oct 20, 2015
+
+- Reinstate browserify as a dependency—fixes packages that use docpress-base in their tests
+
 ## [v0.6.0]
 > Oct 20, 2015
 
@@ -58,3 +63,4 @@
 [v0.5.4]: https://github.com/docpress/docpress-base/compare/v0.5.3...v0.5.4
 [v0.5.5]: https://github.com/docpress/docpress-base/compare/v0.5.4...v0.5.5
 [v0.6.0]: https://github.com/docpress/docpress-base/compare/v0.5.5...v0.6.0
+[v0.6.1]: https://github.com/docpress/docpress-base/compare/v0.6.0...v0.6.1
