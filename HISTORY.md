@@ -1,3 +1,8 @@
+## [v0.6.2]
+> Nov 13, 2015
+
+- Add the `googleAnalytics` option
+
 ## [v0.6.1]
 > Oct 20, 2015
 
