@@ -89,6 +89,12 @@ html
       script(src=scripts[i])
     title= title
     meta(name='viewport' content='width=device-width')
+    - if (meta.googleAnalytics)
+      script.
+        if (!{!meta.googleAnalytics.domain} || window.location.hostname.indexOf(!{JSON.stringify(meta.googleAnalytics.domain)}) === window.location.hostname.length - #{meta.googleAnalytics.domain.length}) {
+          (function(d,o,c,p,r,e,s){d['GoogleAnalyticsObject']=r;d[r]=d[r]||function(){(d[r].q=d[r].q||[]).push(arguments)},d[r].l=1*new Date();e=o.createElement(c),s=o.getElementsByTagName(c)[0];e.async=1;e.src=p;s.parentNode.insertBefore(e,s)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create',!{JSON.stringify(meta.googleAnalytics.id)},'auto')
+        }
   body.-menu-visible
     .doc-layout
       .toggle.menu-toggle.js-menu-toggle

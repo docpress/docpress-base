@@ -15,9 +15,22 @@ var Scrollclass = require('./scrollclass')
 void (function () {
   ready(function () {
     new Pjax({
-      selectors: ['.body', '.toc-menu', 'title']
+      selectors: ['.body', '.toc-menu', 'title'],
+      analytics: sendPageview
     })
   })
+
+  ready(sendPageview)
+
+  function sendPageview () {
+    var title = document.querySelector('title')
+    if (window.ga) {
+      window.ga('send', 'pageview', {
+        page: window.location.href,
+        title: title && title.text
+      })
+    }
+  }
 
   document.addEventListener('pjax:send', function () {
     Nprogress.start()
@@ -82,7 +95,7 @@ void (function () {
   })
 }())
 
-void(function () {
+void (function () {
   onmount('.footer-nav', function (b) {
     b.sc = Scrollclass(this, {
       className: '-expanded',
@@ -95,7 +108,7 @@ void(function () {
   })
 }())
 
-void(function () {
+void (function () {
   onmount('.header-nav', function (b) {
     b.sc = Scrollclass(this, {
       className: '-expanded',
