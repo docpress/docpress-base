@@ -51,9 +51,5 @@
     "test": "mocha",
     "serve": "ss fixture/onmount/_docpress",
     "watch": "mocha -R min --watch"
-  },
-  "files": [
-    "cache/script.js",
-    "cache/style.css"
-  ]
+  }
 }
