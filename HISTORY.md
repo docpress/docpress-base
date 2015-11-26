@@ -74,3 +74,5 @@
 [v0.5.5]: https://github.com/docpress/docpress-base/compare/v0.5.4...v0.5.5
 [v0.6.0]: https://github.com/docpress/docpress-base/compare/v0.5.5...v0.6.0
 [v0.6.1]: https://github.com/docpress/docpress-base/compare/v0.6.0...v0.6.1
+[v0.6.2]: https://github.com/docpress/docpress-base/compare/v0.6.1...v0.6.2
+[v0.6.4]: https://github.com/docpress/docpress-base/compare/v0.6.2...v0.6.4
