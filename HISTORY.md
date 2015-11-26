@@ -1,3 +1,8 @@
+## [v0.6.5]
+> Nov 26, 2015
+
+- Fix packaging
+
 ## [v0.6.4]
 > Nov 26, 2015
 
@@ -76,3 +81,4 @@
 [v0.6.1]: https://github.com/docpress/docpress-base/compare/v0.6.0...v0.6.1
 [v0.6.2]: https://github.com/docpress/docpress-base/compare/v0.6.1...v0.6.2
 [v0.6.4]: https://github.com/docpress/docpress-base/compare/v0.6.2...v0.6.4
+[v0.6.5]: https://github.com/docpress/docpress-base/compare/v0.6.4...v0.6.5
