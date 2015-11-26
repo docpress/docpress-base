@@ -1,3 +1,8 @@
+## [v0.6.4]
+> Nov 26, 2015
+
+- [docpress/#2](https://github.com/docpress/docpress/issues/2) - fix stylesheet problem
+
 ## [v0.6.2]
 > Nov 13, 2015
 

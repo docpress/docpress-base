@@ -1,7 +1,7 @@
 {
   "name": "docpress-base",
   "description": "Base theme for Docpress.",
-  "version": "0.6.2",
+  "version": "0.6.4",
   "author": "Rico Sta. Cruz <rico@ricostacruz.com>",
   "bugs": {
     "url": "https://github.com/docpress/docpress-base/issues"
@@ -51,5 +51,9 @@
     "test": "mocha",
     "serve": "ss fixture/onmount/_docpress",
     "watch": "mocha -R min --watch"
-  }
+  },
+  "files": [
+    "cache/script.js",
+    "cache/style.css"
+  ]
 }
