@@ -1,3 +1,9 @@
+## [v0.6.10]
+> Dec 10, 2015
+
+- iconfonts [v0.8.0](https://github.com/rstacruz/iconfonts/blob/master/History.md#v0.8.0)
+  - Fix Firefox not loading the icons
+
 ## [v0.6.5]
 > Nov 26, 2015
 
@@ -82,3 +88,4 @@
 [v0.6.2]: https://github.com/docpress/docpress-base/compare/v0.6.1...v0.6.2
 [v0.6.4]: https://github.com/docpress/docpress-base/compare/v0.6.2...v0.6.4
 [v0.6.5]: https://github.com/docpress/docpress-base/compare/v0.6.4...v0.6.5
+[v0.6.10]: https://github.com/docpress/docpress-base/compare/v0.6.5...v0.6.10
