@@ -98,10 +98,10 @@ html
   body.-menu-visible
     .doc-layout
       .toggle.menu-toggle.js-menu-toggle
+      .menu.toc-menu
+        +menu(toc, 0)
       .body(class=('page-' + slug))
         +header-nav
         .markdown-body
           != contents
         +footer-nav(prev, next)
-      .menu.toc-menu
-        +menu(toc, 0)
