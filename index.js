@@ -117,6 +117,20 @@ function addJs (files, ms, done) {
     files['assets/script.js'] = { contents }
     this.scripts.push('assets/script.js?t=' +
       hash(files['assets/script.js'].contents))
+
+    // Add user's files
+    let scripts = ms.metadata()
+
+    if (Array.isArray(scripts)) {
+      let userScripts = scripts.map((location) => {
+        let file = files[location]
+        if (!file.contents) return
+        let fileHash = hash(file.contents)
+        return `${location}?t=${fileHash}`
+      }).filter((url) => !!url)
+      this.scripts = this.scripts.concat(userScripts)
+    }
+
     done()
   }
 
