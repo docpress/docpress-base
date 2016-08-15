@@ -2,7 +2,7 @@
 
 const ware = require('ware')
 const fs = require('fs')
-const jade = require('jade')
+const pug = require('pug')
 const join = require('path').join
 const assign = Object.assign
 
@@ -125,7 +125,7 @@ function addJs (files, ms, done) {
 }
 
 /**
- * Layout jade.
+ * Layout pug.
  * Passes these template options:
  *
  * * `base` — prefix.
@@ -151,9 +151,9 @@ function relayout (files, ms, done) {
   const index = files['_docpress.json'].index
   const meta = ms.metadata()
 
-  const jadeData = fs.readFileSync(join(__dirname, 'data/layout.jade'), 'utf-8')
-  const layout = memoize(['jade', jadeData], () => {
-    return jade.compile(jadeData, { pretty: true })
+  const pugData = fs.readFileSync(join(__dirname, 'data/layout.pug'), 'utf-8')
+  const layout = memoize(['pug', pugData], () => {
+    return pug.compile(pugData, { pretty: true })
   })
 
   eachCons(index, (_, fname, __, prevName, ___, nextName) => {
@@ -170,9 +170,9 @@ function relayout (files, ms, done) {
       active: fname
     }
 
-    const key = [ jadeData, locals, file ]
+    const key = [ pugData, locals, file ]
 
-    file.contents = memoize(['jadedata', key], () => {
+    file.contents = memoize(['pugdata', key], () => {
       return layout(assign({}, file, locals))
     })
   })
