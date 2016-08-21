@@ -26,7 +26,7 @@
   "devDependencies": {
     "docpress-core": "git://github.com/docpress/docpress-core.git#master",
     "expect": "1.16.0",
-    "istanbul": "0.4.2",
+    "istanbul": "0.4.5",
     "metalsmith": "2.1.0",
     "mocha": "2.4.2",
     "mocha-clean": "1.0.0",
