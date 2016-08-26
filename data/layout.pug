@@ -68,12 +68,12 @@ mixin footer-nav(prev, next)
       if prev
         .left
           a(href=prev.url)
-            span.title= prev.title
+            span.title= prev.sectionTitle
       if next
         .right
           a(href=next.url)
             span.label= "Next: "
-            span.title= next.title
+            span.title= next.sectionTitle
 
 //-
 //- html
