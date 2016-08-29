@@ -537,3 +537,15 @@ ul.heading-list
           display: block
           height: 64px
 
+//
+// Custom scrollbars
+//
+
+.toc-menu
+  &::-webkit-scrollbar
+    width: 8px
+
+  &::-webkit-scrollbar-thumb
+    background: $line
+    border-radius: 8px
+    box-shadow: inset 2px 0 0 2px $bg
