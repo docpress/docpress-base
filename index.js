@@ -190,7 +190,12 @@ function relayout (files, ms, done) {
     const scripts = this.scripts.map(relativize(base))
 
     const locals = {
-      base, toc, index, meta, styles, scripts,
+      base,
+      toc,
+      index,
+      meta,
+      styles,
+      scripts,
       prev: prevName && assign({}, index[prevName], { url: base + prevName }),
       next: nextName && assign({}, index[nextName], { url: base + nextName }),
       active: fname
