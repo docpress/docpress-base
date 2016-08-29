@@ -6,12 +6,14 @@ const pug = require('pug')
 const join = require('path').join
 const assign = Object.assign
 
+const hash = require('./lib/hash')
 const buildJs = require('./lib/build_js')
 const buildCss = require('./lib/build_css')
-const hash = require('./lib/hash')
-const eachCons = require('./lib/helpers/each_cons')
-const toArray = require('./lib/helpers/to_array')
+
 const memoize = require('./lib/memoize')
+const noop = require('./lib/helpers/noop')
+const toArray = require('./lib/helpers/to_array')
+const eachCons = require('./lib/helpers/each_cons')
 const useCache = require('./lib/helpers/use_cache')
 
 /**
@@ -65,7 +67,7 @@ function sortJs (files, ms, done) {
   const list = toArray(ms.metadata().js)
   const add = addAsset.bind(this, this.scripts, 'js', files)
 
-  list.forEach((item) => { add(item) })
+  list.forEach((item) => add(item))
   done()
 }
 
@@ -96,7 +98,7 @@ function addAsset (list, what, files, item) {
 function addCss (files, ms, done) {
   const callback = (err, contents) => {
     if (err) return done(err)
-    files['assets/style.css'] = { contents }
+    files['assets/style.css'] = {contents}
     this.styles.unshift('assets/style.css?t=' + hash(contents))
     done()
   }
@@ -104,7 +106,7 @@ function addCss (files, ms, done) {
   const cacheable = (this.stylusImports.length === 0)
 
   ;(cacheable && useCache('cache/style.css', callback)) ||
-    buildCss({ imports: this.stylusImports }, callback)
+  buildCss({ imports: this.stylusImports }, callback)
 }
 
 /**
@@ -114,7 +116,7 @@ function addCss (files, ms, done) {
 function addJs (files, ms, done) {
   const callback = (err, contents) => {
     if (err) return done(err)
-    files['assets/script.js'] = { contents }
+    files['assets/script.js'] = {contents}
     this.scripts.push('assets/script.js?t=' +
       hash(files['assets/script.js'].contents))
 
@@ -135,7 +137,7 @@ function addJs (files, ms, done) {
   }
 
   useCache('cache/script.js', callback) ||
-    buildJs({}, callback)
+  buildJs({}, callback)
 }
 
 /**
@@ -160,11 +162,21 @@ function addJs (files, ms, done) {
  * * `docs`
  */
 
+function injectDisqus (disqus) {
+  if (!disqus) return noop
+  var exclude = new RegExp(disqus.exclude || 'index')
+  return function addDisqus (fname, meta) {
+    if (exclude.test(fname)) return
+    meta.disqus = disqus.shortname
+  }
+}
+
 function relayout (files, ms, done) {
   const toc = files['_docpress.json'].toc
   const index = files['_docpress.json'].index
   const meta = ms.metadata()
 
+  const addDisqus = injectDisqus(meta.disqus)
   const pugData = fs.readFileSync(join(__dirname, 'data/layout.pug'), 'utf-8')
   const layout = memoize(['pug', pugData], () => {
     return pug.compile(pugData, { pretty: true })
@@ -183,6 +195,8 @@ function relayout (files, ms, done) {
       next: nextName && assign({}, index[nextName], { url: base + nextName }),
       active: fname
     }
+
+    addDisqus(fname, meta)
 
     const key = [ pugData, locals, file ]
 
