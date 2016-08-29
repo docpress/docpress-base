@@ -1,3 +1,8 @@
+## v0.7.0 - unreleased
+
+- Use the system font, rather than Helvetica. This is in line with GitHub's new styles.
+- Stylus files are now available in `css/`, giving way to other packages that would like to extend Docpress's styles.
+
 ## [v0.6.10]
 > Dec 10, 2015
 
