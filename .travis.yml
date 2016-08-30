@@ -1,5 +1,8 @@
 language: node_js
 node_js:
+- 'stable'
+- '6'
+- '5'
 - '4'
 cache:
   directories:
@@ -7,3 +10,6 @@ cache:
 script:
 - npm run coverage
 - npm run build
+
+after_success:
+- npm run coveralls
