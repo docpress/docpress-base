@@ -117,7 +117,7 @@ html
         +header-nav
         .markdown-body
           != contents
-          - if (meta.disqus)
-            +disqus(meta.disqus)
+        - if (meta.disqus)
+          +disqus(meta.disqus)
 
         +footer-nav(prev, next)
