@@ -165,10 +165,13 @@ function addJs (files, ms, done) {
 function injectDisqus (disqus) {
   if (!disqus) return noop
   var exclude = new RegExp(disqus.exclude || 'index')
-  return function addDisqus (fname, meta) {
-    if (exclude.test(fname)) return
-    meta.disqus = disqus.shortname
+
+  function addDisqus (fname, meta) {
+    if (exclude.test(fname)) return null
+    return disqus.shortname
   }
+
+  return addDisqus
 }
 
 function relayout (files, ms, done) {
@@ -201,8 +204,7 @@ function relayout (files, ms, done) {
       active: fname
     }
 
-    addDisqus(fname, meta)
-
+    meta.disqus = addDisqus(fname, meta)
     const key = [ pugData, locals, file ]
 
     file.contents = memoize(['pugdata', key], () => {
