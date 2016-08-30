@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "coveralls": "~2.11.12",
-    "docpress-core": "github:docpress/docpress-coret#master",
+    "docpress-core": "docpress/docpress-core#master",
     "expect": "~1.20.2",
     "metalsmith": "~2.2.0",
     "mocha": "~3.0.2",
