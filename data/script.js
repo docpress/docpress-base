@@ -1,8 +1,6 @@
-/* eslint-disable no-new */
 var Pjax = require('pjax')
 var Nprogress = require('nprogress')
 var onmount = require('onmount')
-var each = require('dom101/each')
 var toggleClass = require('dom101/toggle-class')
 var ready = require('dom101/ready')
 var Scrolltrack = require('./scrolltrack')
@@ -14,7 +12,7 @@ var Scrollclass = require('./scrollclass')
 
 void (function () {
   ready(function () {
-    new Pjax({
+    new Pjax({ // eslint-disable-line
       selectors: ['.body', '.toc-menu', 'title'],
       analytics: sendPageview
     })

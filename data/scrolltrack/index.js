@@ -151,7 +151,6 @@ Scrolltrack.prototype.scrollTop = function () {
   return y + offset
 }
 
-
 /**
  * Updates the selected link.
  */
