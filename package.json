@@ -21,7 +21,8 @@
     "pug": "^2.0.0-beta6",
     "stylus": "0.54.5",
     "uglifyify": "3.0.2",
-    "ware": "1.3.0"
+    "ware": "1.3.0",
+    "snyk": "^1.19.1"
   },
   "devDependencies": {
     "docpress-core": "git://github.com/docpress/docpress-core.git#master",
@@ -47,9 +48,11 @@
   "scripts": {
     "coverage": "istanbul cover _mocha -x '**/fixture/**' -- -R spec",
     "build": "mkdir -p cache && ./bin/build --css > cache/style.css && ./bin/build --js > cache/script.js",
-    "prepublish": "npm run build",
+    "prepublish": "npm run snyk-protect && npm run build",
     "test": "mocha",
     "serve": "ss fixture/onmount/_docpress",
-    "watch": "mocha -R min --watch"
-  }
+    "watch": "mocha -R min --watch",
+    "snyk-protect": "snyk protect"
+  },
+  "snyk": true
 }
