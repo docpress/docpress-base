@@ -20,7 +20,7 @@
     "postcss": "5.2.0",
     "pug": "^2.0.0-beta6",
     "stylus": "0.54.5",
-    "uglifyify": "3.0.2",
+    "uglifyify": "3.0.3",
     "ware": "1.3.0"
   },
   "devDependencies": {
