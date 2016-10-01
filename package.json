@@ -1,8 +1,17 @@
 {
   "name": "docpress-base",
   "description": "Base theme for Docpress.",
+  "homepage": "http://docpress/docpress-base#readme",
   "version": "0.6.10",
-  "author": "Rico Sta. Cruz <rico@ricostacruz.com>",
+  "main": "index.js",
+  "author": {
+    "email": "rico@ricostacruz.com",
+    "name": "Rico Sta. Cruz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/docpress/docpress-base.git"
+  },
   "bugs": {
     "url": "https://github.com/docpress/docpress-base/issues"
   },
@@ -18,19 +27,19 @@
     "onmount": "1.3.0",
     "pjax": "0.2.4",
     "postcss": "5.2.4",
-    "pug": "^2.0.0-beta6",
+    "pug": "2.0.0-beta6",
     "stylus": "0.54.5",
     "uglifyify": "3.0.3",
     "ware": "1.3.0"
   },
   "devDependencies": {
-    "docpress-core": "git://github.com/docpress/docpress-core.git#master",
+    "coveralls": "2.11.12",
+    "docpress-core": "docpress/docpress-core",
     "expect": "1.20.2",
-    "istanbul": "0.4.5",
     "metalsmith": "2.2.0",
     "mocha": "3.1.0",
     "mocha-clean": "1.0.0",
-    "mocha-standard": "1.0.0",
+    "nyc": "8.1.0",
     "standard": "8.3.0",
     "superstatic": "4.0.3"
   },
@@ -47,9 +56,22 @@
   "scripts": {
     "coverage": "istanbul cover _mocha -x '**/fixture/**' -- -R spec",
     "build": "mkdir -p cache && ./bin/build --css > cache/style.css && ./bin/build --js > cache/script.js",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "lint": "standard",
     "prepublish": "npm run build",
-    "test": "mocha",
+    "pretest": "npm run lint",
     "serve": "ss fixture/onmount/_docpress",
+    "test": "nyc mocha",
     "watch": "mocha -R min --watch"
+  },
+  "license": "MIT",
+  "standard": {
+    "global": [
+      "before",
+      "beforeEach",
+      "describe",
+      "expect",
+      "it"
+    ]
   }
 }
