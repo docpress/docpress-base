@@ -1,3 +1,10 @@
+<a name="0.7.1"></a>
+## 0.7.1 (2016-10-01)
+
+* Update deps ([f7e2783](https://github.com/docpress/docpress-base/commit/f7e2783))
+
+
+
 <a name="0.7.0"></a>
 # 0.7.0 (2016-10-01)
 
