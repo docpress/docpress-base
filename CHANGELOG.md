@@ -1,3 +1,11 @@
+<a name="0.7.2"></a>
+## 0.7.2 (2016-10-01)
+
+* Add editorconfig ([6b311a4](https://github.com/docpress/docpress-base/commit/6b311a4))
+* Remove TIL ([1f3c7a7](https://github.com/docpress/docpress-base/commit/1f3c7a7))
+
+
+
 <a name="0.7.1"></a>
 ## 0.7.1 (2016-10-01)
 
