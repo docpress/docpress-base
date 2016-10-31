@@ -121,7 +121,7 @@ function addJs (files, ms, done) {
       hash(files['assets/script.js'].contents))
 
     // Add user's files
-    let scripts = ms.metadata()
+    let scripts = ms.metadata().scripts
 
     if (Array.isArray(scripts)) {
       let userScripts = scripts.map((location) => {
