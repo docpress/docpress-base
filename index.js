@@ -4,6 +4,7 @@ const ware = require('ware')
 const fs = require('fs')
 const pug = require('pug')
 const join = require('path').join
+const url = require('url')
 const assign = Object.assign
 
 const hash = require('./lib/hash')
@@ -125,10 +126,18 @@ function addJs (files, ms, done) {
 
     if (Array.isArray(scripts)) {
       let userScripts = scripts.map((location) => {
-        let file = files[location]
-        if (!file.contents) return
-        let fileHash = hash(file.contents)
-        return `${location}?t=${fileHash}`
+        // Need to check if local or external
+        let fileUrl = url.parse(location, false, true)
+        if (fileUrl.host === null) {
+          // Local url
+          let file = files[location]
+          if (!file.contents) return
+          let fileHash = hash(file.contents)
+          return `${location}?t=${fileHash}`
+        } else {
+          // External url
+          return `${location}`
+        }
       }).filter((url) => !!url)
       this.scripts = this.scripts.concat(userScripts)
     }
