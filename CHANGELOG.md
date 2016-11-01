@@ -1,3 +1,16 @@
+<a name="0.7.3"></a>
+## 0.7.3 (2016-11-01)
+
+* Fix bug where docpress would not load external scripts (#172) ([8aceef1](https://github.com/docpress/docpress-base/commit/8aceef1)), closes [#172](https://github.com/docpress/docpress-base/issues/172)
+* Fix bug which was causing custom scripts to never be loaded (#171) ([dd0e548](https://github.com/docpress/docpress-base/commit/dd0e548)), closes [#171](https://github.com/docpress/docpress-base/issues/171)
+* chore(package): update mocha to version 3.1.2 ([00cdbb6](https://github.com/docpress/docpress-base/commit/00cdbb6))
+* chore(package): update normalize.css to version 5.0.0 ([54f182c](https://github.com/docpress/docpress-base/commit/54f182c))
+* chore(package): update nyc to version 8.3.1 ([3949273](https://github.com/docpress/docpress-base/commit/3949273))
+* chore(package): update postcss to version 5.2.5 (#167) ([fce4ce1](https://github.com/docpress/docpress-base/commit/fce4ce1))
+* chore(package): update standard to version 8.4.0 ([4615152](https://github.com/docpress/docpress-base/commit/4615152))
+
+
+
 <a name="0.7.2"></a>
 ## 0.7.2 (2016-10-01)
 
