@@ -2,7 +2,7 @@
   "name": "docpress-base",
   "description": "Base theme for Docpress.",
   "homepage": "https://github.com/docpress/docpress-base#readme",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "main": "index.js",
   "author": {
     "email": "rico@ricostacruz.com",

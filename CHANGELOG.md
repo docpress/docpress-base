@@ -1,3 +1,10 @@
+<a name="0.7.4"></a>
+## 0.7.4 (2016-11-01)
+
+* Update .npmignore ([b8aff27](https://github.com/docpress/docpress-base/commit/b8aff27))
+
+
+
 <a name="0.7.3"></a>
 ## 0.7.3 (2016-11-01)
 
