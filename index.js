@@ -127,7 +127,7 @@ function addJs (files, ms, done) {
     if (Array.isArray(scripts)) {
       let userScripts = scripts.map((location) => {
         // Need to check if local or external
-        let fileUrl = new url.parse(location, false, true)
+        let fileUrl = url.parse(location, false, true)
         if (fileUrl.host === null) {
           // Local url
           let file = files[location]
