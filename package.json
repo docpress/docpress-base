@@ -2,7 +2,7 @@
   "name": "docpress-base",
   "description": "Base theme for Docpress.",
   "homepage": "https://github.com/docpress/docpress-base#readme",
-  "version": "0.7.4",
+  "version": "0.7.5",
   "main": "index.js",
   "author": {
     "email": "rico@ricostacruz.com",
@@ -41,6 +41,7 @@
     "mocha-clean": "1.0.0",
     "nyc": "9.0.1",
     "standard": "8.4.0",
+    "standard-version": "^4.4.0",
     "superstatic": "4.0.3"
   },
   "scripts": {
@@ -51,7 +52,8 @@
     "pretest": "npm run lint",
     "serve": "ss fixture/onmount/_docpress",
     "test": "nyc mocha",
-    "watch": "mocha -R min --watch"
+    "watch": "mocha -R min --watch",
+    "release": "standard-version"
   },
   "license": "MIT",
   "standard": {

@@ -1,3 +1,46 @@
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+<a name="0.7.5"></a>
+## [0.7.5](https://github.com/docpress/docpress-base/compare/v0.6.10...v0.7.5) (2019-02-12)
+
+
+### Bug Fixes
+
+* Add bottom padding on mobile ([#246](https://github.com/docpress/docpress-base/issues/246)) ([227ee05](https://github.com/docpress/docpress-base/commit/227ee05))
+* Add padding in markdown-body div ([#245](https://github.com/docpress/docpress-base/issues/245)) ([7769a2d](https://github.com/docpress/docpress-base/commit/7769a2d)), closes [#244](https://github.com/docpress/docpress-base/issues/244)
+* **styles:** add depth 3 margin ([6183168](https://github.com/docpress/docpress-base/commit/6183168))
+* update deps ([589fbe1](https://github.com/docpress/docpress-base/commit/589fbe1))
+* Wrap top level list items in a list element ([#247](https://github.com/docpress/docpress-base/issues/247)) ([b822259](https://github.com/docpress/docpress-base/commit/b822259))
+
+
+
+<a name="0.7.4"></a>
+## 0.7.4 (2016-11-01)
+
+
+
+<a name="0.7.3"></a>
+## 0.7.3 (2016-11-01)
+
+
+
+<a name="0.7.2"></a>
+## 0.7.2 (2016-10-01)
+
+
+
+<a name="0.7.1"></a>
+## 0.7.1 (2016-10-01)
+
+
+
+<a name="0.7.0"></a>
+# 0.7.0 (2016-10-01)
+
+
+
 <a name="0.7.4"></a>
 ## 0.7.4 (2016-11-01)
 
@@ -352,6 +395,3 @@
 * Update todo ([eab7c6c](https://github.com/docpress/docpress-base/commit/eab7c6c))
 * Update todo ([d690a1f](https://github.com/docpress/docpress-base/commit/d690a1f))
 * Update todo ([0cecbfe](https://github.com/docpress/docpress-base/commit/0cecbfe))
-
-
-
