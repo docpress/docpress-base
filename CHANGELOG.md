@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/docpress/docpress-base/compare/v0.7.6...v0.8.0) (2019-11-01)
+
+
+### Bug Fixes
+
+* **deps:** audit ([68705bf](https://github.com/docpress/docpress-base/commit/68705bf))
+
+
+### Features
+
+* add lang to html ([26a099b](https://github.com/docpress/docpress-base/commit/26a099b))
+
+
+
 <a name="0.7.6"></a>
 ## [0.7.6](https://github.com/docpress/docpress-base/compare/v0.7.5...v0.7.6) (2019-02-12)
 
