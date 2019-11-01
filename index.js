@@ -214,6 +214,7 @@ function relayout (files, ms, done) {
     }
 
     meta.disqus = addDisqus(fname, meta)
+    meta.lang = meta.lang || 'en';
     const key = [ pugData, locals, file ]
 
     file.contents = memoize(['pugdata', key], () => {
