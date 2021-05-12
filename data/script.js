@@ -13,6 +13,7 @@ var Scrollclass = require('./scrollclass')
 void (function () {
   ready(function () {
     new Pjax({ // eslint-disable-line
+      elements: 'a[href]:not([href^="http://"]):not([href^="https://"]):not([data-no-pjax])',
       selectors: ['.body', '.toc-menu', 'title'],
       analytics: sendPageview
     })
