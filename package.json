@@ -42,7 +42,7 @@
     "nyc": "9.0.1",
     "standard": "8.4.0",
     "standard-version": "^8.0.1",
-    "superstatic": "4.0.3"
+    "superstatic": "5.0.2"
   },
   "scripts": {
     "build": "mkdir -p cache && ./bin/build --css > cache/style.css && ./bin/build --js > cache/script.js",
