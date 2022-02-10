@@ -17,7 +17,7 @@ mixin disqus(shortname)
 mixin menu(m, depth)
   li.menu-item(class=('-level-' + depth + (m.sections ? ' -parent' : '')))
     if m.url
-      a.link.title(href=(base + m.url + (m.anchor || '')) class=((active === m.url && !m.anchor ? '-active' : '') + (' link-' + m.slug)))= m.title
+      a.link.title(href=(((m.url.match(/^[a-z]+:\/\//) || m.url.match(/^mailto:/) || m.url.match(/^#/)) ? '' : base) + m.url + (m.anchor || '')) class=((active === m.url && !m.anchor ? '-active' : '') + (' link-' + m.slug))  )= m.title
     else if m.title
       span.title= m.title
 
